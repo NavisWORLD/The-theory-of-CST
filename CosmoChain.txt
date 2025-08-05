@@ -1,0 +1,148 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 Cory Shane Davis. All rights reserved.
+// CosmoChain: A blockchain inspired by the 12D Cosmic Synapse Theory by Cory Shane Davis.
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+pragma solidity ^0.8.20;
+
+/// @title CosmoChain
+/// @author Cory Shane Davis
+/// @notice A blockchain implementing Synaptic Proof-of-Influence (PoI) for minting SynapCoins,
+///         inspired by the 12D Cosmic Synapse Theory (CST). Nodes register, interact with
+///         transaction volumes and latencies, and mint tokens based on influence scores.
+///         The contract owner receives a 0.5% fee on transactions.
+/// @dev Designed for deployment on Ethereum testnets (e.g., Sepolia) and Mainnet.
+///      Ensure sufficient gas and test ETH for deployment and interactions.
+contract CosmoChain {
+    // Constants
+    uint256 public constant D_0 = 100; // Characteristic latency (ms) for influence decay
+    uint256 public constant T_MAX = 1_000_000; // Max transaction volume (USD) for normalization
+    uint256 public constant KAPPA = 0.01 ether; // Minting rate (tokens per influence-hour)
+    uint256 public constant BLOCK_INTERVAL = 1 hours; // Time interval for minting (1 hour)
+    uint256 public constant FEE_PERCENT = 5; // 0.5% transaction fee (5/1000)
+    address public immutable owner; // Contract owner, receives 0.5% fees
+
+    // State variables
+    mapping(address => uint256) public influenceScores; // Influence score per node
+    mapping(address => uint256) public synapCoinBalances; // SynapCoin balance per node
+    mapping(address => mapping(address => uint256)) public transactionVolumes; // Volume between nodes
+    mapping(address => mapping(address => uint256)) public latencies; // Latency between nodes
+    uint256 public lastMintBlock; // Timestamp of last minting event
+    uint256 public totalSupply; // Total SynapCoins minted
+    address[] public nodes; // List of registered nodes
+
+    // Events
+    event InfluenceUpdated(address indexed node, uint256 influence);
+    event TokensMinted(address indexed node, uint256 amount);
+    event FeeCollected(address indexed node, uint256 amount);
+    event TransactionProcessed(address indexed from, address indexed to, uint256 volume);
+
+    /// @notice Initializes the contract, setting the deployer as the owner.
+    /// @dev Replace the owner address with your MetaMask wallet address before deployment.
+    constructor() {
+        owner = 0xYourNewAddress; // Replace with your new MetaMask address
+    }
+
+    /// @notice Registers a new node to participate in the network.
+    /// @dev Nodes can only register once. Emits no event.
+    function registerNode() external {
+        require(influenceScores[msg.sender] == 0, "Node already registered");
+        nodes.push(msg.sender);
+        influenceScores[msg.sender] = 1; // Initial influence score
+    }
+
+    /// @notice Updates interaction between two nodes, recording volume and latency, and collects a 0.5% fee.
+    /// @param to The recipient node address.
+    /// @param volume The transaction volume in USD.
+    /// @param latency The interaction latency in ms.
+    /// @dev Requires sufficient ETH for the fee (volume * 0.5%). Emits FeeCollected and TransactionProcessed events.
+    function updateInteraction(address to, uint256 volume, uint256 latency) external payable {
+        require(to != msg.sender, "Cannot interact with self");
+        require(influenceScores[msg.sender] > 0, "Node not registered");
+        require(influenceScores[to] > 0, "Recipient not registered");
+
+        uint256 fee = (volume * FEE_PERCENT) / 1000; // 0.5% fee
+        require(msg.value >= fee, "Insufficient fee");
+        payable(owner).transfer(fee);
+        emit FeeCollected(msg.sender, fee);
+
+        transactionVolumes[msg.sender][to] = volume;
+        latencies[msg.sender][to] = latency;
+        emit TransactionProcessed(msg.sender, to, volume);
+    }
+
+    /// @notice Calculates the influence score for a node based on interactions with others.
+    /// @param node The node address to calculate influence for.
+    /// @return influence The calculated influence score.
+    /// @dev Uses a decay function based on latency (D_0) and normalizes by T_MAX. Emits InfluenceUpdated event.
+    function calculateInfluence(address node) public returns (uint256) {
+        uint256 influence = 0;
+        for (uint256 i = 0; i < nodes.length; i++) {
+            address other = nodes[i];
+            if (other != node) {
+                uint256 d_ij = latencies[node][other];
+                uint256 t_ij = transactionVolumes[node][other];
+                uint256 decay = d_ij < D_0 ? 1e18 - (d_ij * 1e18 / D_0) : 0;
+                influence += (decay * t_ij) / T_MAX;
+            }
+        }
+        influenceScores[node] = influence;
+        emit InfluenceUpdated(node, influence);
+        return influence;
+    }
+
+    /// @notice Mints SynapCoins for the calling node based on its influence score.
+    /// @dev Can only mint every BLOCK_INTERVAL (1 hour). Calls calculateInfluence. Emits TokensMinted event.
+    function mintTokens() external {
+        require(block.timestamp >= lastMintBlock + BLOCK_INTERVAL, "Too soon to mint");
+        require(influenceScores[msg.sender] > 0, "Node not registered");
+        lastMintBlock = block.timestamp;
+
+        uint256 influence = calculateInfluence(msg.sender);
+        uint256 tokens = (KAPPA * influence * BLOCK_INTERVAL) / 1 hours;
+        synapCoinBalances[msg.sender] += tokens;
+        totalSupply += tokens;
+        emit TokensMinted(msg.sender, tokens);
+    }
+
+    /// @notice Transfers SynapCoins from the caller to another registered node.
+    /// @param to The recipient node address.
+    /// @param amount The amount of SynapCoins to transfer.
+    /// @dev Requires sufficient balance and recipient to be registered.
+    function transfer(address to, uint256 amount) external {
+        require(influenceScores[to] > 0, "Recipient not registered");
+        require(synapCoinBalances[msg.sender] >= amount, "Insufficient balance");
+        synapCoinBalances[msg.sender] -= amount;
+        synapCoinBalances[to] += amount;
+    }
+
+    /// @notice Retrieves the SynapCoin balance of a node.
+    /// @param node The node address to query.
+    /// @return The SynapCoin balance.
+    function getBalance(address node) external view returns (uint256) {
+        return synapCoinBalances[node];
+    }
+
+    /// @notice Retrieves the total number of registered nodes.
+    /// @return The number of nodes.
+    function getNodeCount() external view returns (uint256) {
+        return nodes.length;
+    }
+}
