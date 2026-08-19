@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/cst-hero.svg" alt="Cosmic Synapse Theory 12D: state, memory, coupling, signal, and evidence" width="100%" />
+
 # COSMIC SYNAPSE THEORY // CST
 
 ### A computational research program for higher-dimensional state, persistent memory, signal-driven dynamics, and synaptic-style interaction
