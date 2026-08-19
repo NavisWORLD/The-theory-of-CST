@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#05060a" />
+  <meta name="description" content="Interactive 12-channel Cosmic Synapse Theory field visualization." />
+  <title>CST // Living Field</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05060a;
+      --panel: rgba(8, 10, 18, 0.72);
+      --line: rgba(255,255,255,.10);
+      --text: #f5f7fb;
+      --muted: #9ca8bf;
+      --cyan: #6ee7ff;
+      --violet: #a78bfa;
+      --pink: #f472b6;
+      --green: #6ee7b7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { overflow-x: hidden; }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+    .noise {
+      position: fixed; inset: 0; pointer-events: none; opacity: .08; mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+    }
+    .shell { position: relative; z-index: 2; min-height: 100vh; padding: max(18px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom)); display: grid; grid-template-rows: auto 1fr auto; gap: 18px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 10px; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; font-weight: 800; }
+    .sigil { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(110,231,255,.55); box-shadow: 0 0 28px rgba(110,231,255,.22) inset, 0 0 24px rgba(167,139,250,.18); position: relative; }
+    .sigil::before, .sigil::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(167,139,250,.55); transform: rotate(45deg); }
+    .sigil::after { inset: 11px; border-color: rgba(244,114,182,.65); transform: rotate(0deg); }
+    .badge { border: 1px solid var(--line); background: rgba(255,255,255,.035); backdrop-filter: blur(12px); border-radius: 999px; padding: 8px 11px; color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    main { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr); gap: 18px; align-items: end; }
+    .hero { align-self: center; padding: 4vh 1vw 2vh; max-width: 880px; }
+    .eyebrow { color: var(--cyan); text-transform: uppercase; letter-spacing: .22em; font-size: 11px; font-weight: 800; margin-bottom: 14px; }
+    h1 { margin: 0; font-size: clamp(48px, 10vw, 142px); line-height: .82; letter-spacing: -.07em; font-weight: 900; }
+    h1 span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.46); text-shadow: 0 0 40px rgba(110,231,255,.05); }
+    .lede { max-width: 720px; color: #c4ccda; font-size: clamp(15px, 2vw, 19px); line-height: 1.6; margin: 24px 0 0; }
+    .lede strong { color: white; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    button, a.button { appearance: none; border: 1px solid rgba(255,255,255,.16); color: white; background: rgba(255,255,255,.055); padding: 11px 14px; border-radius: 12px; font: inherit; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; text-decoration: none; backdrop-filter: blur(14px); transition: .2s ease; }
+    button:hover, a.button:hover { transform: translateY(-1px); border-color: rgba(110,231,255,.55); background: rgba(110,231,255,.08); }
+    button.primary { background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(167,139,250,.2)); border-color: rgba(110,231,255,.36); }
+    .panel { border: 1px solid var(--line); background: var(--panel); backdrop-filter: blur(18px) saturate(130%); border-radius: 22px; padding: 16px; box-shadow: 0 20px 70px rgba(0,0,0,.35); }
+    .panel-title { display: flex; justify-content: space-between; align-items: center; font-size: 11px; text-transform: uppercase; letter-spacing: .13em; color: var(--muted); margin-bottom: 14px; }
+    .live { display: inline-flex; gap: 6px; align-items: center; color: var(--green); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 12px currentColor; }
+    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .metric { border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.025); border-radius: 14px; padding: 12px; min-height: 78px; }
+    .metric .k { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+    .metric .v { margin-top: 7px; font-size: 20px; font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+    .state-grid { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .state { border: 1px solid rgba(255,255,255,.06); border-radius: 9px; padding: 7px; background: rgba(255,255,255,.02); }
+    .state-head { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .bar { height: 3px; margin-top: 6px; background: rgba(255,255,255,.08); overflow: hidden; border-radius: 999px; }
+    .bar > i { display: block; height: 100%; width: 50%; background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink)); box-shadow: 0 0 10px rgba(110,231,255,.4); }
+    .boundary { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: rgba(255,255,255,.46); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .pulse { animation: pulse .8s ease; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(110,231,255,.55); } 100% { box-shadow: 0 0 0 30px rgba(110,231,255,0); } }
+    @media (max-width: 920px) {
+      main { grid-template-columns: 1fr; align-items: start; }
+      .hero { padding-top: 8vh; }
+      .panel { max-width: none; }
+    }
+    @media (max-width: 520px) {
+      .shell { padding-left: 12px; padding-right: 12px; }
+      .badge { display: none; }
+      .hero { padding-top: 5vh; }
+      h1 { font-size: clamp(56px, 20vw, 92px); }
+      .lede { font-size: 14px; }
+      .metrics { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .state-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="sigil"></span><span>NavisWORLD / CST</span></div>
+      <div class="badge">12-channel computational field · local browser demo</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Cosmic Synapse Theory // Living Field</div>
+        <h1>CST<span>12D</span></h1>
+        <p class="lede">
+          <strong>State is not a snapshot here.</strong> It is a field. Twelve channels evolve, couple, remember perturbations, and continuously reshape the network you are watching. This page is a visual research companion to the CST codebase, not a claim that physical reality has been proven to work this way.
+        </p>
+        <div class="actions">
+          <button class="primary" id="pulseBtn">Inject pulse</button>
+          <button id="seedBtn">New deterministic field</button>
+          <button id="micBtn">Enable mic reactivity</button>
+          <a class="button" href="docs/CST_2026.md">Read the theory map</a>
+        </div>
+      </section>
+
+      <aside class="panel" id="panel">
+        <div class="panel-title">
+          <span>Field telemetry</span>
+          <span class="live"><span class="dot"></span><span id="modeLabel">synthetic</span></span>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="k">Field ψ proxy</div><div class="v" id="psi">0.0000</div></div>
+          <div class="metric"><div class="k">Entropy</div><div class="v" id="entropy">0.000</div></div>
+          <div class="metric"><div class="k">Lyapunov proxy</div><div class="v" id="lyap">0.000</div></div>
+          <div class="metric"><div class="k">Active links</div><div class="v" id="links">0</div></div>
+        </div>
+        <div class="state-grid" id="states"></div>
+        <div class="boundary">
+          <strong>Scientific boundary:</strong> ψ and Lyapunov values on this page are visualization proxies derived from the browser field. They are not measurements of a physical cosmic field. See the claim ledger for the repository's evidence rules.
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Read code · run controls · preserve nulls</span>
+      <span>Signal → state → coupling → memory → evidence</span>
+    </footer>
+  </div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('field');
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const psiEl = document.getElementById('psi');
+  const entropyEl = document.getElementById('entropy');
+  const lyapEl = document.getElementById('lyap');
+  const linksEl = document.getElementById('links');
+  const statesEl = document.getElementById('states');
+  const panel = document.getElementById('panel');
+  const modeLabel = document.getElementById('modeLabel');
+  const pulseBtn = document.getElementById('pulseBtn');
+  const seedBtn = document.getElementById('seedBtn');
+  const micBtn = document.getElementById('micBtn');
+
+  let width = 1, height = 1, dpr = 1;
+  let seed = 0xC57C0DE;
+  let rand = mulberry32(seed);
+  let nodes = [];
+  let field = new Float32Array(12);
+  let previous = new Float32Array(12);
+  let impulse = 0;
+  let audioLevel = 0;
+  let analyser = null;
+  let audioData = null;
+  let micStream = null;
+  let lastT = performance.now();
+
+  const stateEls = [];
+  for (let i = 0; i < 12; i++) {
+    const el = document.createElement('div');
+    el.className = 'state';
+    el.innerHTML = `<div class="state-head"><span>D${String(i + 1).padStart(2,'0')}</span><span class="n">0.000</span></div><div class="bar"><i></i></div>`;
+    statesEl.appendChild(el);
+    stateEls.push({ n: el.querySelector('.n'), bar: el.querySelector('i') });
+  }
+
+  function mulberry32(a) {
+    return function() {
+      let t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  function gaussian() {
+    const u = Math.max(rand(), 1e-9), v = Math.max(rand(), 1e-9);
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+
+  function resize() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    width = innerWidth; height = innerHeight;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function reset(nextSeed = (seed + 0x9E3779B9) >>> 0) {
+    seed = nextSeed;
+    rand = mulberry32(seed);
+    for (let d = 0; d < 12; d++) field[d] = (rand() * 2 - 1) * .55;
+    nodes = Array.from({ length: Math.max(58, Math.min(120, Math.floor(width / 12))) }, (_, i) => ({
+      id: i,
+      s: Float32Array.from({ length: 12 }, () => (rand() * 2 - 1)),
+      phase: rand() * Math.PI * 2,
+      speed: .18 + rand() * .72,
+      weight: .3 + rand() * .9,
+      memory: 0,
+      x: 0, y: 0, px: 0, py: 0
+    }));
+    impulse = .6;
+  }
+
+  function project(node, t) {
+    let x = node.s[0] * .42 + node.s[3] * .18 + node.s[7] * .12 + Math.sin(t * .00011 + node.phase) * .08;
+    let y = node.s[1] * .40 + node.s[5] * .16 + node.s[9] * .12 + Math.cos(t * .00013 + node.phase) * .08;
+    const depth = node.s[2] * .35 + node.s[11] * .18;
+    const scale = .72 + (depth + 1) * .18;
+    node.px = node.x; node.py = node.y;
+    node.x = width * .50 + x * width * scale;
+    node.y = height * .47 + y * height * scale;
+  }
+
+  function step(t, dt) {
+    previous.set(field);
+    const signal = Math.min(1, audioLevel * 2.2 + impulse);
+    const phi = 1.61803398875;
+
+    for (let d = 0; d < 12; d++) {
+      const left = field[(d + 11) % 12];
+      const right = field[(d + 1) % 12];
+      const harmonic = Math.sin(t * (.00014 + d * .000007) * phi + d * .71);
+      const coupled = (left + right) * .5;
+      const target = field[d] * .975 + coupled * .014 + harmonic * .012 + signal * Math.sin(d * 1.37 + t * .001) * .022;
+      field[d] = Math.tanh(target);
+    }
+
+    for (const n of nodes) {
+      let similarity = 0;
+      for (let d = 0; d < 12; d++) similarity += n.s[d] * field[d];
+      similarity /= 12;
+      n.memory = n.memory * .982 + Math.abs(similarity) * .018 + signal * .012;
+      for (let d = 0; d < 12; d++) {
+        const drive = field[d] * (.004 + n.weight * .003) + Math.sin(t * .0002 * n.speed + n.phase + d) * .0015;
+        n.s[d] = Math.tanh(n.s[d] * .996 + drive + gaussian() * .00015 * Math.sqrt(Math.max(dt, .001)));
+      }
+      project(n, t);
+    }
+    impulse *= Math.pow(.88, dt * 60);
+  }
+
+  function telemetry() {
+    let abs = 0, sq = 0, delta = 0;
+    for (let d = 0; d < 12; d++) {
+      abs += Math.abs(field[d]);
+      sq += field[d] * field[d];
+      delta += Math.abs(field[d] - previous[d]);
+      const normalized = (field[d] + 1) / 2;
+      stateEls[d].n.textContent = field[d].toFixed(3);
+      stateEls[d].bar.style.width = `${Math.max(2, normalized * 100)}%`;
+    }
+    const entropy = Math.min(1, abs / 12 + audioLevel * .12);
+    const lyap = Math.min(1, delta * 3.2);
+    const psi = (sq / 12) * 1.618 + entropy * .08;
+    psiEl.textContent = psi.toFixed(4);
+    entropyEl.textContent = entropy.toFixed(3);
+    lyapEl.textContent = lyap.toFixed(3);
+    return { entropy, lyap, psi };
+  }
+
+  function draw(t) {
+    const g = ctx.createRadialGradient(width * .52, height * .43, 20, width * .52, height * .43, Math.max(width, height) * .76);
+    g.addColorStop(0, '#0d1020'); g.addColorStop(.42, '#080a12'); g.addColorStop(1, '#030407');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, width, height);
+
+    const glow = ctx.createRadialGradient(width * .53, height * .43, 0, width * .53, height * .43, Math.min(width, height) * .42);
+    glow.addColorStop(0, `rgba(89, 208, 255, ${.035 + audioLevel * .06})`);
+    glow.addColorStop(.45, 'rgba(110, 90, 255, .018)'); glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
+
+    let links = 0;
+    const maxDist = Math.max(90, Math.min(width, height) * .16);
+    const maxDist2 = maxDist * maxDist;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y, ds = dx*dx + dy*dy;
+        if (ds < maxDist2) {
+          links++;
+          const alpha = (1 - ds / maxDist2) * .13 * Math.min(1, .55 + a.memory + b.memory + audioLevel);
+          ctx.strokeStyle = `rgba(${120 + Math.floor(field[3]*30)}, ${180 + Math.floor(field[6]*35)}, 255, ${Math.max(0, alpha)})`;
+          ctx.lineWidth = .6;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    linksEl.textContent = links.toLocaleString();
+
+    for (const n of nodes) {
+      const hue = 190 + ((n.s[4] + 1) * 52 + n.s[10] * 28);
+      const radius = 1.1 + n.memory * 3.5 + audioLevel * 2.2;
+      ctx.shadowBlur = 10 + n.memory * 24;
+      ctx.shadowColor = `hsla(${hue}, 95%, 72%, .65)`;
+      ctx.fillStyle = `hsla(${hue}, 92%, 78%, ${.45 + n.memory * .38})`;
+      ctx.beginPath(); ctx.arc(n.x, n.y, radius, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+
+    ctx.save();
+    ctx.translate(width * .5, height * .47);
+    ctx.strokeStyle = `rgba(255,255,255,${.035 + audioLevel * .04})`;
+    ctx.lineWidth = 1;
+    for (let r = 1; r <= 4; r++) {
+      ctx.beginPath(); ctx.arc(0, 0, r * Math.min(width,height) * .105, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  async function enableMic() {
+    try {
+      micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      const AC = window.AudioContext || window.webkitAudioContext;
+      const ac = new AC();
+      const src = ac.createMediaStreamSource(micStream);
+      analyser = ac.createAnalyser(); analyser.fftSize = 512; analyser.smoothingTimeConstant = .82;
+      audioData = new Uint8Array(analyser.frequencyBinCount);
+      src.connect(analyser);
+      modeLabel.textContent = 'microphone local';
+      micBtn.textContent = 'Mic reactive';
+      micBtn.disabled = true;
+    } catch (err) {
+      modeLabel.textContent = 'mic unavailable';
+      micBtn.textContent = 'Mic unavailable';
+      console.warn('Microphone mode unavailable:', err);
+    }
+  }
+
+  function readAudio() {
+    if (!analyser || !audioData) { audioLevel *= .92; return; }
+    analyser.getByteFrequencyData(audioData);
+    let sum = 0;
+    for (let i = 0; i < audioData.length; i++) sum += audioData[i] * audioData[i];
+    const rms = Math.sqrt(sum / audioData.length) / 255;
+    audioLevel = audioLevel * .78 + rms * .22;
+  }
+
+  function frame(t) {
+    const dt = Math.min(.05, Math.max(.001, (t - lastT) / 1000)); lastT = t;
+    readAudio(); step(t, dt); draw(t); telemetry();
+    requestAnimationFrame(frame);
+  }
+
+  pulseBtn.addEventListener('click', () => {
+    impulse = Math.min(1.4, impulse + .9);
+    panel.classList.remove('pulse'); void panel.offsetWidth; panel.classList.add('pulse');
+  });
+  seedBtn.addEventListener('click', () => reset());
+  micBtn.addEventListener('click', enableMic);
+  addEventListener('resize', () => { resize(); reset(seed); });
+
+  resize(); reset(seed); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
