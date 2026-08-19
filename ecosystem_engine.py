@@ -68,8 +68,8 @@ class EcosystemEngine:
             except (TypeError, ValueError):
                 rms = 0.0
             try:
-                freqs = audio_data.get("freqs") or []
-                pitch = float(freqs[0]) if len(freqs) else 440.0
+                freqs = audio_data.get("freqs")
+                pitch = float(freqs[0]) if freqs is not None and len(freqs) else 440.0
                 pitch_norm = _clamp01((pitch - 20.0) / (20000.0 - 20.0))
             except (TypeError, ValueError, IndexError):
                 pitch_norm = 0.0
