@@ -1,0 +1,5 @@
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+PyAudio>=0.2.13
+web3>=6.0
