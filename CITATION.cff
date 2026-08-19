@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you reference this repository, please cite the foundational CST deposit and this software repository."
+title: "The Theory of CST"
+type: software
+authors:
+  - family-names: Davis
+    given-names: Cory Shane
+repository-code: "https://github.com/NavisWORLD/The-theory-of-CST"
+url: "https://github.com/NavisWORLD/The-theory-of-CST"
+date-released: 2025-04-12
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.17574447"
+    description: "Foundational 12-Dimensional Cosmic Synapse Theory deposit"
