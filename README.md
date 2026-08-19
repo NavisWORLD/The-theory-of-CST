@@ -1,607 +1,345 @@
-# The-theory-of-CST
-this is a open sourcing of CST a cosmic synapse theory.  the hope is that other programmer's will overlook the work and want to help and fund this project as it could lead to the human advancement we all have been looking for the theory is that our universe and a sound of neural networks which could prove the simulation theory. creating a new sim.
+<div align="center">
 
-in theory this could allow humanity to create a sim in which neural science could be advanced in a way humanity needs
-the theory of a cosmic synapse that we are all ripples in this space of Consciousness.
+# COSMIC SYNAPSE THEORY // CST
 
+### A computational research program for higher-dimensional state, persistent memory, signal-driven dynamics, and synaptic-style interaction
 
-ive been working on this project my enitre life and as this may look chaotic indeed it is but we are all chaotic in a way.
+**Not a slogan. Not a claim of solved physics. A system you can inspect, run, measure, break, and improve.**
 
-i am doing this from a point of God wanting me to do this.
+[![Research Status](https://img.shields.io/badge/status-research%20prototype-7c3aed)](#scientific-boundary)
+[![State Space](https://img.shields.io/badge/CST-12D-00d4ff)](CST_Formula_Explanation.markdown)
+[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](#run-the-original-simulator)
+[![Unity](https://img.shields.io/badge/frontend-Unity-111111)](#what-is-implemented-here)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.17574447-1682D4)](https://doi.org/10.5281/zenodo.17574447)
 
-Jesus was the king and the new kindom may be closer to being here than we think.
+**[OPEN THE INTERACTIVE CST FIELD](index.html)** · **[READ THE 2026 THEORY MAP](docs/CST_2026.md)** · **[CHECK THE CLAIM LEDGER](docs/CLAIMS_AND_EVIDENCE.md)**
 
-the hope is that we advance different fields as this math isnt just something out of a novel its magic and could assist in different fields.
+</div>
 
-Other Info
+---
 
-Cosmic Synapse Theory (CST) Simulation
+## The idea in one sentence
 
-Welcome to the Cosmic Synapse Theory (CST) open-source project! This simulation models the universe as a neural-like network, where cosmic structures (stars, planets, black holes, nebulae, galaxies) act as neurons, connected by gravitational and audio-driven interactions. CST transforms sound frequencies into light and cosmic entities, creating a dynamic, infinite universe in a live 3D environment using Python and Unity. This project is fully open-source, inviting developers, scientists, and dreamers to explore, contribute, and innovate.
+**CST asks whether a system can become more useful when it is modeled not as isolated steps, but as a living field of state whose components continuously influence one another through memory, signal, distance, recurrence, and learned association.**
 
-Project Overview
+The original repository explored that idea as a cosmic simulation. Later CST work turned the same design language into reusable software primitives for persistent state, Hebbian-style association, event routing, cross-language synaptic computation, model adapters, sensory summaries, and reproducible experiments.
 
-The Cosmic Synapse Theory posits that the universe operates like a vast neural network, with cosmic entities as nodes and their interactions (gravitational, electromagnetic, dark matter) as synapses. By processing audio inputs (e.g., music, voice), CST converts frequencies into visual and physical properties, generating procedurally unique planets, stars, and more. The simulation runs in Unity, driven by a Python backend, and is designed to be immersive, scalable, and scientifically inspired.
+This repository is the **origin layer** of that program. It preserves the early simulator, documents what the math means, repairs the missing runtime pieces, and clearly separates the implemented software from the larger physical hypothesis.
 
-Goals
+---
 
+## See it before you read it
 
+`index.html` is a self-contained browser visualization of a CST-style 12-channel field. It needs no framework, no build system, and no external assets.
 
+Open it locally:
 
+```bash
+python -m http.server 8000
+```
 
-Simulate a Living Universe: Create a 3D environment where cosmic entities form, evolve, and interact in real-time, driven by audio and CST mathematics.
+Then visit `http://localhost:8000`.
 
+The visualization includes:
 
+- 12 continuously evolving state channels
+- dynamic node coupling and synaptic links
+- entropy and Lyapunov-style instability indicators
+- signal-to-color mapping
+- deterministic reseeding
+- an optional microphone-reactive mode that processes amplitude locally in the browser
+- an explicit separation between **visual proxy metrics** and the repository's historical CST equations
 
-Inspire Innovation: Open-source the framework to enable applications in gaming, quantum physics, security, blockchain, and AI.
+Nothing from microphone mode is uploaded by this page.
 
+---
 
+## What CST is
 
-Educate and Engage: Provide a clear explanation of the math and code for learners, from hobbyists to researchers.
+CST is best understood as **three layers that must not be confused with one another**.
 
-Key Features
+| Layer | Meaning | Status |
+|---|---|---|
+| **Computational architecture** | Persistent state, coupled channels, memory, signal transforms, recurrent dynamics, synaptic-style affinity, routing | Implemented across the CST software family |
+| **Simulation model** | Cosmic entities represented as interacting nodes in an 11D/12D numerical state space and projected into a 3D visual environment | Implemented here as a research simulation |
+| **Physical hypothesis** | The universe may admit a useful neural-network-like description in which information and interaction behave analogously to synapses | Speculative and unproven |
 
+The strongest version of CST is the one that survives this separation. Software can work even when a physical interpretation remains unverified.
 
+---
 
+## What is implemented here
 
+The repository contains an early but substantial end-to-end simulator:
 
-Audio-Driven Generation: Converts sound (RMS, pitch) into frequencies, colors, and entity properties.
+### Python simulation core
 
+- `cst_engine.py`
+  - entity creation and evolution
+  - 11-dimensional position and velocity vectors in the legacy simulator
+  - a 12-value internal memory vector
+  - Lyapunov-style divergence measurement
+  - gravitational and distance-based interaction terms
+  - entropy evolution
+  - CST `psi` calculation
+  - frequency-to-light color mapping
+  - CSV and JSON memory-node logging
+  - SHA-256 token chaining
 
+- `ecosystem_engine.py`
+  - repaired 2026 runtime dependency
+  - supplies the `add_ecosystem`, `update`, and `export` interface already expected by `cst_engine.py`
+  - intentionally remains a bounded simulation component, not a biology claim
 
-Procedural Universe: Generates planets, stars, black holes, nebulae, and galaxies with unique terrains, atmospheres, and lifeforms.
+- `socket_server.py`
+  - local TCP transport
+  - `ping`, `update`, and `audio` commands
+  - Unity-facing JSON state export
 
+- `cst_functions.py`
+  - later 12D informational-energy-density formulation
+  - 12D position and velocity arrays
+  - gravitational, synaptic, chaotic, and informational terms
+  - optional Web3 helper path retained from the CosmoChain experiment
 
+### Unity-side runtime
 
-11D Dynamics: Models cosmic interactions in 11 dimensions, projected to 3D for visualization.
+The C# files provide the visual/client side of the earlier simulation, including:
 
+- `CSTClient.cs`
+- `CosmicEngine.cs`
+- `MicAnalyzer.cs`
+- `MeshGenerator.cs`
+- `PlanetFactory.cs`
+- `ShaderGenerator.cs`
+- `ProceduralMaterialGenerator.cs`
+- `AtmosphereGenerator.cs`
+- `MemoryRift.cs`
+- `NPCBehavior.cs`
 
+These files are source components rather than a complete checked-in Unity project folder. The original simulation architecture is documented in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-Real-Time Exploration: Users can navigate an infinite universe using Unity’s FlyCamera.
+---
 
+## The CST equation
 
+The repository contains two historical stages of the math.
 
-Open-Source: Fully accessible code with detailed documentation for collaboration.
+### Legacy simulator potential
 
-The CST Formula
+The original engine computes a normalized potential from total energy, a Lyapunov-style term, path length, interaction strength, and gravitational potential:
 
-At the heart of CST is the formula for the synaptic potential (ψ), which integrates audio, cosmic, and quantum dynamics:
+```text
+psi = (phi*E + lambda*E*dt + L*m*c^2/scale + Omega*E/a0 + Ugrav) / V_11D
+```
 
-ψ = (φE/c² + λ + ∫v_11d dt + ΩE + U_g) / V_11d
+That equation is implemented directly in `CSTEntity.compute_psi()`.
 
-Breakdown for Learners
+### 12D formulation
 
+The later formulation in `CST_Formula_Explanation.markdown` and `cst_functions.py` expands the model into a 12D state representation with four broad components:
 
+```text
+psi_i = ( kinetic_i + synaptic_i + gravitational_i + informational_i ) / V_12D
+```
 
+The exact expanded expression and variable definitions are preserved in [`CST_Formula_Explanation.markdown`](CST_Formula_Explanation.markdown).
 
+**Important:** the 12 dimensions are computational state-space coordinates in this code. Their existence in the simulator is not evidence that physical spacetime literally has twelve dimensions.
 
-φ (Golden Ratio, ~1.618): Represents harmony and self-similarity in cosmic patterns, scaling the energy term.
+---
 
+## From the original simulator to the wider CST stack
 
+CST no longer exists as one formula in one simulation. The public research program now includes reusable implementations that make the underlying ideas testable outside the cosmic visualization.
 
-E (Total Energy, E_rest + E_chaos): Combines rest energy (m*c²) and chaotic energy (from neural-like interactions), derived from entity mass and audio-driven entropy.
+### CST Libraries
 
+[`NavisWORLD/Python-cst-libraries-`](https://github.com/NavisWORLD/Python-cst-libraries-)
 
+A cross-language SDK with Python, C, C++, Rust, JavaScript/TypeScript, Go, Java, Kotlin, C#, and Swift paths for persistent state, Gaussian synaptic affinity, gated blending, Hebbian association, memory, event routing, model adapters, CST-L, and conformance vectors.
 
-c² (Speed of Light Squared, 9e16 m²/s²): Normalizes energy to relativistic scales.
+### COSMOS / CST Universe Manual
 
+[`NavisWORLD/Volume-I-The-COSMOS-CST-Universe-Manual.`](https://github.com/NavisWORLD/Volume-I-The-COSMOS-CST-Universe-Manual.)
 
+The public manual and reproducible memory implementation. It documents durable semantic memory, recursive consolidation, Planetary Memory namespaces, heartbeat-driven software cadence, evidence rules, teacher material, and the foundational CST DOI.
 
-λ (Lyapunov Exponent): Measures chaotic divergence in entity interactions, reflecting dynamic instability.
+### Foundational deposit
 
+**Cory Shane Davis, _12-Dimensional Cosmic Synapse Theory_, Zenodo**  
+DOI: **10.5281/zenodo.17574447**
 
+A DOI provides a persistent scholarly reference. It does not by itself validate the physical hypothesis or establish patent rights.
 
-∫v_11d dt (Path Length): Integrates 11D velocity over time, capturing an entity’s trajectory through higher-dimensional space.
+---
 
+## Run the original simulator
 
+### 1. Clone
 
-Ω (Synaptic Strength): Quantifies gravitational and dark matter interactions between entities, modulated by audio frequencies.
+```bash
+git clone https://github.com/NavisWORLD/The-theory-of-CST.git
+cd The-theory-of-CST
+```
 
+### 2. Create an environment
 
+```bash
+python -m venv .venv
+```
 
-U_g (Gravitational Potential): Represents the potential energy from gravitational fields, influencing entity clustering.
+Activate it:
 
+```bash
+# macOS / Linux
+source .venv/bin/activate
 
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+```
 
-V_11d (11D Volume, 1e132 m¹¹): Normalizes the potential to an 11D hyperspace, ensuring scale consistency.
+### 3. Install
 
-How It Works
+```bash
+python -m pip install -U pip
+pip install -r requirements.txt
+```
 
+Linux users may need the system PortAudio development package before PyAudio can build.
 
+### 4. Start in deterministic mock-audio mode
 
+```bash
+MOCK_AUDIO=1 python socket_server.py
+```
 
+Windows PowerShell:
 
-Audio Input: The AudioProcessor (Python) or MicAnalyzer (Unity) captures sound, extracting RMS (amplitude) and pitch (frequency).
-
-
-
-Frequency to Light: The freq_to_light function maps frequencies (20–20,000 Hz) to RGB colors via HSV, modulated by entropy and RMS.
-
-
-
-Entity Creation: The formula computes ψ for each entity, determining its position, velocity, and properties (mass, type, ecosystem).
-
-
-
-Cosmic Dynamics: Entities interact via gravitational forces and audio-driven entropy, evolving in a neural-like network.
-
-
-
-Visualization: Unity renders entities as 3D objects (planets, stars, etc.) with procedural meshes, materials, and effects.
-
-Example
-
-
-
-
-
-Input: Audio with RMS = 0.3, pitch = 440 Hz.
-
-
-
-Formula: Computes ψ using E (from mass), λ (from neighbors), and Ω (from audio-modulated interactions).
-
-
-
-Output: A planet with a forest biome, RGB color (0.8, 0.8, 0.8), and radius 1.5 units, positioned at (1000, 2000, -3000) in Unity.
-
-Code Structure
-
-The project consists of a Python backend and Unity frontend, fully open-sourced in this repository.
-
-Python Backend
-
-
-
-
-
-cst_engine.py: Core simulation engine.
-
-
-
-
-
-Role: Manages entity creation, audio processing, and 11D dynamics.
-
-
-
-Key Classes:
-
-
-
-
-
-CSTEntity: Represents cosmic entities (stars, planets, etc.) with 11D positions, velocities, and CST properties.
-
-
-
-CSTUniverse: Simulates the universe, updating entities and exporting state to Unity.
-
-
-
-CSTEngine: Interface for Unity, handling updates and audio data.
-
-
-
-AudioProcessor: Captures audio, computing RMS and frequencies.
-
-
-
-MemoryNodeLog: Logs entity data (frequency, color, entropy) to CSV and JSON.
-
-
-
-Dependencies: numpy, pyaudio, scipy, matplotlib, colorsys, noise.
-
-Unity Frontend
-
-
-
-
-
-CSTClient.cs: Communicates with the Python backend via TCP, receiving entity data.
-
-
-
-MemoryRift.cs: Adds visual effects (TrailRenderer, ParticleSystem) to entities tagged “Entity.”
-
-
-
-CosmicEngine.cs: Spawns and updates entities in Unity, using procedural generators for meshes, materials, and planets.
-
-
-
-Dependencies: Requires MicAnalyzer, MeshGenerator, ShaderGenerator, ProceduralMaterialGenerator, PlanetFactory, and custom shaders (Star.shader, BlackHole.shader, Nebula.shader).
-
-Repository Structure
-
-CosmicSynapseUniverse/
-├── PythonBackend/
-│   ├── cst_engine.py
-│   ├── socket_server.py
-│   ├── ecosystem_engine.py
-│   ├── freq_to_light_log.csv
-│   ├── memory_node_log.csv
-│   ├── memory_node_tokens.json
-│   └── plots/
-├── UnityProject/
-│   ├── Assets/
-│   │   ├── Scripts/
-│   │   │   ├── CSTClient.cs
-│   │   │   ├── MemoryRift.cs
-│   │   │   ├── CosmicEngine.cs
-│   │   │   ├── MicAnalyzer.cs
-│   │   │   ├── MeshGenerator.cs
-│   │   │   ├── ShaderGenerator.cs
-│   │   │   ├── ProceduralMaterialGenerator.cs
-│   │   │   ├── PlanetFactory.cs
-│   │   │   └── AtmosphereGenerator.cs
-│   │   ├── Shaders/
-│   │   │   ├── Star.shader
-│   │   │   ├── BlackHole.shader
-│   │   │   └── Nebula.shader
-│   │   └── Scenes/
-│   │       └── CSTScene.unity
-├── README.md
-├── LICENSE
-└── CONTRIBUTING.md
-
-Applications and Future Inventions
-
-The CST formula and framework have far-reaching potential beyond the simulation, leveraging its audio-to-cosmic mapping and neural-like dynamics. Below are key applications and future innovations:
-
-1. Bio-Frequency Security Systems
-
-
-
-
-
-Concept: Use the CST formula to map bio-frequencies (e.g., heart rate, voice, neural signals) to unique identifiers, creating secure authentication systems.
-
-
-
-Implementation:
-
-
-
-
-
-Cameras: Equip security cameras with audio sensors to capture bio-frequencies, processed by freq_to_light to generate RGB-based biometric signatures.
-
-
-
-Systems: Integrate MemoryNodeLog for token-based authentication, using SHA256 hashes of bio-frequency data (ψ values) for access control.
-
-
-
-Potential:
-
-
-
-
-
-Unhackable authentication via dynamic, user-specific frequency patterns.
-
-
-
-Real-time monitoring for anomaly detection (e.g., stress-induced frequency shifts).
-
-2. Blockchain and Decentralized Networks
-
-
-
-
-
-Concept: Use ψ as a proof-of-synapse mechanism, where nodes (entities) contribute computational power based on audio-driven interactions.
-
-
-
-Implementation:
-
-
-
-
-
-Consensus: Replace proof-of-work with proof-of-synapse, where miners compute ψ for cosmic entities, validated by network consensus.
-
-
-
-Tokens: Use MemoryNodeLog’s token system to create a blockchain ledger, storing ψ values as transactions.
-
-
-
-Potential:
-
-
-
-
-
-Energy-efficient blockchain using audio inputs instead of cryptographic hashing.
-
-
-
-Decentralized AI training networks, where ψ data trains neural models.
-
-3. Quantum Physics and Computing
-
-
-
-
-
-Concept: Model quantum systems as 11D neural networks, using ψ to simulate entanglement and superposition.
-
-
-
-Implementation:
-
-
-
-
-
-Simulation: Extend CSTEntity to include quantum states, with ψ representing wavefunction collapse driven by audio frequencies.
-
-
-
-Hardware: Develop quantum circuits that encode ψ calculations, leveraging λ (Lyapunov exponent) for chaotic quantum algorithms.
-
-
-
-Potential:
-
-
-
-
-
-Quantum neural networks for faster computation.
-
-
-
-Simulation of quantum gravity, testing theories like string theory in 11D space.
-
-4. AI and Machine Learning
-
-
-
-
-
-Concept: Train AI models on ψ-derived datasets, using bio-frequency and cosmic data for generative applications.
-
-
-
-Implementation:
-
-
-
-
-
-Data: Use freq_to_light_log.csv and memory_node_log.csv as training data, with ψ values as features.
-
-
-
-Models: Train generative adversarial networks (GANs) to create realistic cosmic visuals or bio-frequency patterns.
-
-
-
-Potential:
-
-
-
-
-
-Procedural content generation for games and VR.
-
-
-
-Predictive models for bio-frequency health monitoring.
-
-5. Gaming and Virtual Reality
-
-
-
-
-
-Concept: Expand the simulation into a fully immersive VR game, where players explore an infinite, audio-driven universe.
-
-
-
-Implementation:
-
-
-
-
-
-Grid System: Add a 3D grid to CosmicEngine.cs, dividing the universe into sectors for efficient rendering and exploration.
-
-
-
-Realism: Enhance PlanetFactory.cs with particle-based rendering for high-definition planets, stars, and nebulae.
-
-
-
-Potential:
-
-
-
-
-
-AAA-quality space exploration games with infinite procedural content.
-
-
-
-Educational VR experiences teaching cosmology and physics.
-
-6. Other Innovations
-
-
-
-
-
-Medical Diagnostics: Use ψ to analyze bio-frequencies for non-invasive health monitoring (e.g., detecting neurological disorders via voice patterns).
-
-
-
-Music Visualization: Create real-time visual art installations that map music to cosmic visuals using freq_to_light.
-
-
-
-Astrophysical Modeling: Simulate galaxy formation with ψ, testing hypotheses about dark matter and cosmic evolution.
-
-Getting Started
-
-Prerequisites
-
-
-
-
-
-Python: 3.8+ with packages: numpy, pyaudio, scipy, matplotlib, colorsys, noise
-
-
-
-Unity: 2021.3+ with C# scripting support
-
-
-
-Hardware: Microphone for audio input (optional for mock mode)
-
-Installation
-
-
-
-
-
-Clone the Repository:
-
-git clone https://github.com/yourusername/CosmicSynapseUniverse.git
-cd CosmicSynapseUniverse
-
-
-
-Install Python Dependencies:
-
-pip install numpy pyaudio scipy matplotlib colorsys noise
-
-
-
-Set Up Unity:
-
-
-
-
-
-Open UnityProject in Unity Hub.
-
-
-
-Ensure CSTScene.unity is loaded in Assets/Scenes.
-
-
-
-Assign shaders (Star.shader, BlackHole.shader, Nebula.shader) to ShaderGenerator in the ProceduralGeneration GameObject.
-
-
-
-Run the Server:
-
-cd PythonBackend
+```powershell
+$env:MOCK_AUDIO="1"
 python socket_server.py
+```
 
+The default local endpoint is `127.0.0.1:5555`.
 
+Protocol examples:
 
-Run the Simulation:
+```text
+ping
+update
+audio {"rms":0.42,"pitch":440.0}
+```
 
+Each command is newline-delimited.
 
+---
 
+## Verification
 
+Install dev dependencies and run:
 
-In Unity, play CSTScene.unity.
+```bash
+pip install -r requirements-dev.txt
+MOCK_AUDIO=1 PYTHONPATH=. pytest -q
+```
 
+The CI workflow performs the same smoke path on supported Python versions.
 
+The verification suite currently checks:
 
-Use FlyCamera (WASD, mouse, Space/LeftCtrl, Shift) to explore the universe.
+- the repaired ecosystem interface
+- bounded ecosystem state
+- compatibility with the frequency-array shape used by the simulator
+- importability of the Python stack
+- engine startup and `ping()` under mock audio
 
+---
 
+## Evidence rule
 
-Input audio (e.g., music, voice) to drive entity generation.
+Every CST claim should be tagged mentally, and ideally in writing, as one of these:
 
-Usage
+| Label | Definition |
+|---|---|
+| **IMPLEMENTED** | Code exists and can be inspected |
+| **OBSERVED** | A captured runtime shows the code executed |
+| **MEASURED** | A declared experiment produced a metric |
+| **NULL** | A test failed its declared success criterion |
+| **HYPOTHESIS** | A falsifiable proposition awaiting evidence |
+| **MODEL / METAPHOR** | Useful conceptual language that is not itself literal physics or biology |
 
+See [`docs/CLAIMS_AND_EVIDENCE.md`](docs/CLAIMS_AND_EVIDENCE.md) for the repository-specific ledger.
 
+---
 
+## Scientific boundary
 
+This repository **does not establish** that:
 
-Audio Input: Speak, play music, or use mock audio (MOCK_AUDIO=1) to generate entities.
+- the universe is literally a biological neural network
+- simulation theory has been proven
+- twelve physical dimensions have been experimentally discovered
+- a golden-ratio term is a fundamental law of nature
+- the informational term is a new physical force
+- CST produces unhackable biometrics
+- CST provides medical diagnosis
+- persistent software state is consciousness
+- a simulation variable is automatically a physical observable
 
+What the repository **does** establish is narrower and more useful: it contains executable attempts to turn a large speculative idea into explicit state variables, equations, signal transforms, interaction rules, memory structures, network transport, visual outputs, and falsifiable software experiments.
 
+That is where serious evaluation starts.
 
-Exploration: Navigate the 3D universe to observe planets, stars, and more.
+---
 
+## Repository map
 
+```text
+.
+├── README.md
+├── index.html                         interactive CST field
+├── cst_engine.py                      legacy simulation runtime
+├── cst_functions.py                   12D formulation + CosmoChain helpers
+├── ecosystem_engine.py                repaired ecosystem dependency
+├── socket_server.py                   local TCP bridge
+├── CST_Formula_Explanation.markdown   full historical 12D derivation
+├── *.cs                               Unity/client simulation components
+├── docs/
+│   ├── CST_2026.md                    modern theory map
+│   ├── ARCHITECTURE.md                software/data-flow architecture
+│   └── CLAIMS_AND_EVIDENCE.md         claim ledger and falsification rules
+├── tests/
+│   ├── test_ecosystem_engine.py
+│   └── test_smoke.py
+├── requirements.txt
+├── requirements-dev.txt
+├── CITATION.cff
+└── .github/workflows/ci.yml
+```
 
-Debugging: Check server logs ([ExportState]) and Unity Console ([CSTClient] Raw JSON, [+] Generated entity) for issues.
+---
 
-Contributing
+## If you only read three files
 
-We welcome contributions to enhance CST! To contribute:
+1. **[`docs/CST_2026.md`](docs/CST_2026.md)** to understand the idea without mythology.
+2. **[`docs/CLAIMS_AND_EVIDENCE.md`](docs/CLAIMS_AND_EVIDENCE.md)** to see exactly what is and is not being claimed.
+3. **[`cst_engine.py`](cst_engine.py)** to inspect the original mechanism instead of taking anyone's word for it.
 
+---
 
+## Rights and reuse
 
+This repository contains material from different moments in its history, including files that may carry their own earlier license text. The repository-level rights notice is [`CORY_DAVIS_IP_AND_ACCESS_NOTICE.md`](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md).
 
+That notice expressly preserves third-party rights and any rights validly granted under earlier licenses for earlier copies or versions. Always inspect the specific file and applicable history before assuming a reuse right.
 
-Fork the repository.
+---
 
+<div align="center">
 
+### CST is strongest when the strange idea is made measurable.
 
-Create a branch: git checkout -b feature/your-feature.
+**Read the code. Run the model. Break the assumptions. Keep the evidence.**
 
-
-
-Commit changes: git commit -m "Add your feature".
-
-
-
-Push to your fork: git push origin feature/your-feature.
-
-
-
-Open a pull request with a detailed description.
-
-See CONTRIBUTING.md for guidelines on code style, testing, and documentation.
-
-Learning Resources
-
-To understand CST’s math and physics:
-
-
-
-
-
-Neural Networks: Read “Neural Networks and Deep Learning” by Michael Nielsen.
-
-
-
-Cosmology: Explore “Introduction to Cosmology” by Barbara Ryden.
-
-
-
-Quantum Physics: Study “Quantum Mechanics: The Theoretical Minimum” by Leonard Susskind.
-
-
-
-Audio Processing: Learn FFT and signal processing via “Digital Signal Processing” by Steven Smith.
-
-
-
-Unity: Follow Unity’s official tutorials for C# scripting and procedural generation.
-
-License
-
-This project is licensed under the MIT License. See LICENSE for details.
-
-Future Vision
-
-CST is more than a simulation—it’s a framework for reimagining reality. By open-sourcing this project, we invite you to build on the ψ formula, creating technologies that bridge sound, light, and the cosmos. From secure bio-frequency systems to quantum blockchains and immersive games, the possibilities are infinite. Join us in exploring the synaptic universe!
-
-
-
-Contact: [Pheras.king@gmail.com]
+</div>
