@@ -73,3 +73,19 @@ def test_numpy_pitch_changes_climate_response():
     high.update([p2], {"rms": 0.2, "freqs": np.array([12000.0])}, 1.0)
 
     assert low.export(p1.id)["climate_index"] != high.export(p2.id)["climate_index"]
+
+
+def test_update_uses_first_frequency_from_multi_bin_numpy_array():
+    import numpy as np
+
+    low = EcosystemEngine()
+    high = EcosystemEngine()
+    p1 = planet(entity_id=21)
+    p2 = planet(entity_id=22)
+    low.add_ecosystem(p1)
+    high.add_ecosystem(p2)
+
+    low.update([p1], {"rms": 0.2, "freqs": np.array([220.0, 880.0])}, 1.0)
+    high.update([p2], {"rms": 0.2, "freqs": np.array([12000.0, 880.0])}, 1.0)
+
+    assert low.export(p1.id)["climate_index"] != high.export(p2.id)["climate_index"]
