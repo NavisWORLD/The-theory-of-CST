@@ -4,17 +4,19 @@
 
 # COSMIC SYNAPSE THEORY // CST
 
-### A computational research program for higher-dimensional state, persistent memory, signal-driven dynamics, and synaptic-style interaction
+### Research program, executable simulator, and now a playable Mars world
 
-**Not a slogan. Not a claim of solved physics. A system you can inspect, run, measure, break, and improve.**
+**State. Memory. Coupling. Signal. Evidence. Play.**
 
 [![Research Status](https://img.shields.io/badge/status-research%20prototype-7c3aed)](#scientific-boundary)
+[![Mars Synapse](https://img.shields.io/badge/game-Mars%20Synapse%3A%20Red%20Genesis-e66f43)](game/)
 [![State Space](https://img.shields.io/badge/CST-12D-00d4ff)](CST_Formula_Explanation.markdown)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](#run-the-original-simulator)
-[![Unity](https://img.shields.io/badge/frontend-Unity-111111)](#what-is-implemented-here)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.17574447-1682D4)](https://doi.org/10.5281/zenodo.17574447)
 
-**[OPEN THE INTERACTIVE CST FIELD](index.html)** · **[READ THE 2026 THEORY MAP](docs/CST_2026.md)** · **[CHECK THE CLAIM LEDGER](docs/CLAIMS_AND_EVIDENCE.md)**
+## 🔴 **[PLAY / BUILD MARS SYNAPSE: RED GENESIS](game/)**
+
+**[OPEN THE INTERACTIVE CST FIELD](index.html)** · **[READ CST 2026](docs/CST_2026.md)** · **[CHECK THE CLAIM LEDGER](docs/CLAIMS_AND_EVIDENCE.md)**
 
 </div>
 
@@ -22,91 +24,161 @@
 
 ## The idea in one sentence
 
-**CST asks whether a system can become more useful when it is modeled not as isolated steps, but as a living field of state whose components continuously influence one another through memory, signal, distance, recurrence, and learned association.**
+**CST asks what becomes possible when a system is modeled as a persistent field of interacting state whose components continuously influence one another through memory, signal, distance, recurrence, learned association, and network coupling.**
 
-The original repository explored that idea as a cosmic simulation. Later CST work turned the same design language into reusable software primitives for persistent state, Hebbian-style association, event routing, cross-language synaptic computation, model adapters, sensory summaries, and reproducible experiments.
+This repository is the origin layer of that work. It preserves the early cosmic simulator, the 11D/12D mathematical lineage, the Python and Unity experiments, the modern evidence boundaries, and now a complete playable interpretation of the architecture.
 
-This repository is the **origin layer** of that program. It preserves the early simulator, documents what the math means, repairs the missing runtime pieces, and clearly separates the implemented software from the larger physical hypothesis.
+The point is not to ask people to believe a strange idea. The point is to make enough of the idea executable that people can inspect it, test it, play with it, break it, measure it, and improve it.
 
 ---
 
-## See it before you read it
+# MARS SYNAPSE // RED GENESIS
 
-`index.html` is a self-contained browser visualization of a CST-style 12-channel field. It needs no framework, no build system, and no external assets.
+The old CST simulator could generate worlds and evolving entities. **Red Genesis turns that lineage into an actual game.**
 
-Open it locally:
+You are no longer watching the simulation.
+
+You land on Mars.
+
+You move through it, scan it, mine it, survive it, build on it, research it, remember what happened, create settlements, connect those settlements, and try to stabilize a planetary network.
+
+### Core loop
+
+**Land → scan → mine → survive → build → research → expand → connect → adapt → activate Red Genesis.**
+
+The browser game includes:
+
+- deterministic seeded Mars worlds
+- approximately 0.38g / 3.71 m/s² player-scale Mars gravity
+- astronaut movement, sprinting and low-gravity jumping
+- rover traversal, battery use and cargo
+- oxygen, suit energy, radiation and thermal stress
+- day/night solar behavior
+- dust storms and solar-radiation events
+- deterministic resource geology and anomaly scanning
+- gathering and inventory
+- construction and production
+- power generation and storage
+- water and oxygen processing
+- research and technology unlocks
+- research-gated advanced structures
+- settlement founding and logistics
+- CST synaptic links that strengthen through repeated local cooperation
+- twelve-channel planetary state
+- entropy and a clearly labeled CST `psiProxy`
+- persistent event memory with previous-entry chaining
+- five-act campaign progression
+- achievements
+- three manual save slots plus autosave
+- victory and unrecoverable-colony failure states
+- synthesized local game audio
+- optional microphone-reactive cosmetic input
+- desktop controls
+- iPhone-sized touch controls
+- reduced-motion mode
+- high-contrast HUD
+- text scaling and touch-control sensitivity
+
+### Play locally
+
+From the repository root:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then open:
 
-The visualization includes:
+```text
+http://localhost:8000/game/
+```
 
-- 12 continuously evolving state channels
-- dynamic node coupling and synaptic links
-- entropy and Lyapunov-style instability indicators
-- signal-to-color mapping
-- deterministic reseeding
-- an optional microphone-reactive mode that processes amplitude locally in the browser
-- an explicit separation between **visual proxy metrics** and the repository's historical CST equations
+No Python CST backend, account, API key, CDN, or game engine is required for normal browser play.
 
-Nothing from microphone mode is uploaded by this page.
+Game documentation: [`game/README.md`](game/README.md)
+
+Unity expansion contract: [`game/UNITY_BRIDGE.md`](game/UNITY_BRIDGE.md)
+
+---
+
+## Why CST changes the game instead of decorating it
+
+The game maintains a normalized twelve-channel planetary vector:
+
+| Channel | Gameplay meaning |
+|---|---|
+| D01 | Energy |
+| D02 | Matter |
+| D03 | Water |
+| D04 | Atmosphere / life-support stability |
+| D05 | Thermal resilience |
+| D06 | Radiation resilience |
+| D07 | Mobility |
+| D08 | Knowledge |
+| D09 | Memory |
+| D10 | Settlement coherence |
+| D11 | Network coupling |
+| D12 | Adaptation |
+
+Those values are recalculated from what actually exists in the colony: infrastructure, resources, environmental stress, research, remembered events, settlement health and network topology.
+
+Research changes mechanics too. Rover research reduces battery consumption. Energy research increases storage capacity. Advanced habitats, extraction systems, automation and CST infrastructure require matching research instead of appearing as free cosmetic upgrades.
+
+The conceptual update remains:
+
+```text
+state(t+1) = F(
+  state(t),
+  input(t),
+  memory(t),
+  neighbors(t),
+  coupling(t),
+  dynamics(t)
+)
+```
+
+That is the bridge between the original CST idea and the playable system.
 
 ---
 
 ## What CST is
 
-CST is best understood as **three layers that must not be confused with one another**.
+CST is strongest when three layers remain distinct.
 
 | Layer | Meaning | Status |
 |---|---|---|
-| **Computational architecture** | Persistent state, coupled channels, memory, signal transforms, recurrent dynamics, synaptic-style affinity, routing | Implemented across the CST software family |
-| **Simulation model** | Cosmic entities represented as interacting nodes in an 11D/12D numerical state space and projected into a 3D visual environment | Implemented here as a research simulation |
-| **Physical hypothesis** | The universe may admit a useful neural-network-like description in which information and interaction behave analogously to synapses | Speculative and unproven |
+| **Computational architecture** | Persistent state, coupled channels, memory, signal transforms, recurrent dynamics, affinity and routing | Implemented across the CST software family |
+| **Simulation / game model** | Numerical entities and worlds evolving under declared rules | Implemented here |
+| **Physical hypothesis** | A neural-network-like description may be useful for some physical/informational systems | Speculative and unproven |
 
-The strongest version of CST is the one that survives this separation. Software can work even when a physical interpretation remains unverified.
+The software can be useful even if the broad physical interpretation remains unverified.
 
 ---
 
-## What is implemented here
+## Original simulator lineage
 
-The repository contains an early but substantial end-to-end simulator:
+The earlier repository already contained important pieces of the DNA used by Red Genesis.
 
-### Python simulation core
+### Python
 
 - `cst_engine.py`
   - entity creation and evolution
-  - 11-dimensional position and velocity vectors in the legacy simulator
-  - a 12-value internal memory vector
-  - Lyapunov-style divergence measurement
+  - legacy 11D position and velocity
+  - 12-value internal memory
   - gravitational and distance-based interaction terms
   - entropy evolution
   - CST `psi` calculation
-  - frequency-to-light color mapping
-  - CSV and JSON memory-node logging
-  - SHA-256 token chaining
-
+  - frequency-to-light mapping
+  - CSV/JSON memory-node logging
+  - SHA-256 previous-token chaining
 - `ecosystem_engine.py`
-  - repaired 2026 runtime dependency
-  - supplies the `add_ecosystem`, `update`, and `export` interface already expected by `cst_engine.py`
-  - intentionally remains a bounded simulation component, not a biology claim
-
+  - repaired bounded ecosystem compatibility layer
 - `socket_server.py`
-  - local TCP transport
-  - `ping`, `update`, and `audio` commands
-  - Unity-facing JSON state export
-
+  - local TCP transport for Unity-facing state
 - `cst_functions.py`
   - later 12D informational-energy-density formulation
-  - 12D position and velocity arrays
-  - gravitational, synaptic, chaotic, and informational terms
-  - optional Web3 helper path retained from the CosmoChain experiment
 
-### Unity-side runtime
-
-The C# files provide the visual/client side of the earlier simulation, including:
+### Unity lineage
 
 - `CSTClient.cs`
 - `CosmicEngine.cs`
@@ -119,111 +191,62 @@ The C# files provide the visual/client side of the earlier simulation, including
 - `MemoryRift.cs`
 - `NPCBehavior.cs`
 
-These files are source components rather than a complete checked-in Unity project folder. The original simulation architecture is documented in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+The original Unity files are preserved. Red Genesis does not require them to run, and the new player-scale Mars physics deliberately does not apply the old cosmic pairwise-force model directly to the astronaut or rover.
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`game/UNITY_BRIDGE.md`](game/UNITY_BRIDGE.md).
 
 ---
 
-## The CST equation
+## The CST equations
 
-The repository contains two historical stages of the math.
+The repository preserves multiple historical stages rather than pretending the formulation never evolved.
 
 ### Legacy simulator potential
-
-The original engine computes a normalized potential from total energy, a Lyapunov-style term, path length, interaction strength, and gravitational potential:
 
 ```text
 psi = (phi*E + lambda*E*dt + L*m*c^2/scale + Omega*E/a0 + Ugrav) / V_11D
 ```
 
-That equation is implemented directly in `CSTEntity.compute_psi()`.
-
-### 12D formulation
-
-The later formulation in `CST_Formula_Explanation.markdown` and `cst_functions.py` expands the model into a 12D state representation with four broad components:
+### Later 12D formulation
 
 ```text
 psi_i = ( kinetic_i + synaptic_i + gravitational_i + informational_i ) / V_12D
 ```
 
-The exact expanded expression and variable definitions are preserved in [`CST_Formula_Explanation.markdown`](CST_Formula_Explanation.markdown).
+The expanded historical expression remains in [`CST_Formula_Explanation.markdown`](CST_Formula_Explanation.markdown).
 
-**Important:** the 12 dimensions are computational state-space coordinates in this code. Their existence in the simulator is not evidence that physical spacetime literally has twelve dimensions.
+**The existence of twelve software coordinates is not evidence that physical spacetime literally has twelve dimensions.**
 
----
-
-## From the original simulator to the wider CST stack
-
-CST no longer exists as one formula in one simulation. The public research program now includes reusable implementations that make the underlying ideas testable outside the cosmic visualization.
-
-### CST Libraries
-
-[`NavisWORLD/Python-cst-libraries-`](https://github.com/NavisWORLD/Python-cst-libraries-)
-
-A cross-language SDK with Python, C, C++, Rust, JavaScript/TypeScript, Go, Java, Kotlin, C#, and Swift paths for persistent state, Gaussian synaptic affinity, gated blending, Hebbian association, memory, event routing, model adapters, CST-L, and conformance vectors.
-
-### COSMOS / CST Universe Manual
-
-[`NavisWORLD/Volume-I-The-COSMOS-CST-Universe-Manual.`](https://github.com/NavisWORLD/Volume-I-The-COSMOS-CST-Universe-Manual.)
-
-The public manual and reproducible memory implementation. It documents durable semantic memory, recursive consolidation, Planetary Memory namespaces, heartbeat-driven software cadence, evidence rules, teacher material, and the foundational CST DOI.
-
-### Foundational deposit
-
-**Cory Shane Davis, _12-Dimensional Cosmic Synapse Theory_, Zenodo**  
-DOI: **10.5281/zenodo.17574447**
-
-A DOI provides a persistent scholarly reference. It does not by itself validate the physical hypothesis or establish patent rights.
+In Red Genesis, `psiProxy` is explicitly a gameplay proxy. It is not presented as a newly measured field.
 
 ---
 
 ## Run the original simulator
 
-### 1. Clone
-
 ```bash
 git clone https://github.com/NavisWORLD/The-theory-of-CST.git
 cd The-theory-of-CST
-```
-
-### 2. Create an environment
-
-```bash
 python -m venv .venv
 ```
 
-Activate it:
-
-```bash
-# macOS / Linux
-source .venv/bin/activate
-
-# Windows PowerShell
-.venv\Scripts\Activate.ps1
-```
-
-### 3. Install
+Activate the environment, then:
 
 ```bash
 python -m pip install -U pip
 pip install -r requirements.txt
 ```
 
-Linux users may need the system PortAudio development package before PyAudio can build.
-
-### 4. Start in deterministic mock-audio mode
+Mock-audio mode:
 
 ```bash
 MOCK_AUDIO=1 python socket_server.py
 ```
 
-Windows PowerShell:
+Default local endpoint:
 
-```powershell
-$env:MOCK_AUDIO="1"
-python socket_server.py
+```text
+127.0.0.1:5555
 ```
-
-The default local endpoint is `127.0.0.1:5555`.
 
 Protocol examples:
 
@@ -233,65 +256,82 @@ update
 audio {"rms":0.42,"pitch":440.0}
 ```
 
-Each command is newline-delimited.
-
 ---
 
 ## Verification
 
-Install dev dependencies and run:
+Python CST verification:
 
 ```bash
 pip install -r requirements-dev.txt
 MOCK_AUDIO=1 PYTHONPATH=. pytest -q
 ```
 
-The CI workflow performs the same smoke path on supported Python versions.
+Red Genesis verification:
 
-The verification suite currently checks:
+```bash
+cd game
+npm test
+npm run check
+```
 
-- the repaired ecosystem interface
-- bounded ecosystem state
-- compatibility with the frequency-array shape used by the simulator
-- importability of the Python stack
-- engine startup and `ping()` under mock audio
+GitHub Actions contains separate verification for the research runtime and the browser game.
 
 ---
 
 ## Evidence rule
 
-Every CST claim should be tagged mentally, and ideally in writing, as one of these:
-
-| Label | Definition |
+| Label | Meaning |
 |---|---|
 | **IMPLEMENTED** | Code exists and can be inspected |
-| **OBSERVED** | A captured runtime shows the code executed |
+| **OBSERVED** | A captured runtime shows execution |
 | **MEASURED** | A declared experiment produced a metric |
 | **NULL** | A test failed its declared success criterion |
 | **HYPOTHESIS** | A falsifiable proposition awaiting evidence |
 | **MODEL / METAPHOR** | Useful conceptual language that is not itself literal physics or biology |
 
-See [`docs/CLAIMS_AND_EVIDENCE.md`](docs/CLAIMS_AND_EVIDENCE.md) for the repository-specific ledger.
+Repository claim ledger: [`docs/CLAIMS_AND_EVIDENCE.md`](docs/CLAIMS_AND_EVIDENCE.md)
 
 ---
 
 ## Scientific boundary
 
-This repository **does not establish** that:
+This repository does **not** establish that:
 
 - the universe is literally a biological neural network
 - simulation theory has been proven
 - twelve physical dimensions have been experimentally discovered
-- a golden-ratio term is a fundamental law of nature
-- the informational term is a new physical force
-- CST produces unhackable biometrics
-- CST provides medical diagnosis
+- the golden ratio is a fundamental law of nature
+- CST's informational term is a newly measured physical force
 - persistent software state is consciousness
-- a simulation variable is automatically a physical observable
+- game `psiProxy` values are physical observations
+- software variables automatically become physical observables
 
-What the repository **does** establish is narrower and more useful: it contains executable attempts to turn a large speculative idea into explicit state variables, equations, signal transforms, interaction rules, memory structures, network transport, visual outputs, and falsifiable software experiments.
+What it establishes is narrower and testable: there are executable attempts to turn a speculative idea into explicit state, memory, equations, signal transforms, network rules, experiments, simulations and now gameplay.
 
-That is where serious evaluation starts.
+---
+
+## Wider CST stack
+
+### CST Libraries
+
+[`NavisWORLD/Python-cst-libraries-`](https://github.com/NavisWORLD/Python-cst-libraries-)
+
+Reusable work around persistent state, synaptic affinity, Hebbian-style association, memory, routing, model adapters and cross-language computation.
+
+### COSMOS / CST Universe Manual
+
+[`NavisWORLD/Volume-I-The-COSMOS-CST-Universe-Manual.`](https://github.com/NavisWORLD/Volume-I-The-COSMOS-CST-Universe-Manual.)
+
+Public manual and reproducible memory architecture.
+
+### Foundational deposit
+
+**Cory Shane Davis, _12-Dimensional Cosmic Synapse Theory_, Zenodo**
+
+DOI: **10.5281/zenodo.17574447**
+
+A DOI is a persistent scholarly reference. It does not by itself validate a physical hypothesis or establish patent rights.
 
 ---
 
@@ -300,41 +340,49 @@ That is where serious evaluation starts.
 ```text
 .
 ├── README.md
-├── index.html                         interactive CST field
-├── cst_engine.py                      legacy simulation runtime
-├── cst_functions.py                   12D formulation + CosmoChain helpers
-├── ecosystem_engine.py                repaired ecosystem dependency
-├── socket_server.py                   local TCP bridge
-├── CST_Formula_Explanation.markdown   full historical 12D derivation
-├── *.cs                               Unity/client simulation components
+├── index.html                         CST living-field visualization
+├── game/
+│   ├── index.html                     Mars Synapse: Red Genesis
+│   ├── src/                           game systems and browser adapters
+│   ├── tests/                         Node behavior suite
+│   ├── schema/                        versioned game-state contract
+│   ├── README.md                      player/developer guide
+│   └── UNITY_BRIDGE.md                3D expansion contract
+├── cst_engine.py                      legacy Python simulator
+├── cst_functions.py                   later 12D formulation
+├── ecosystem_engine.py                bounded ecosystem compatibility
+├── socket_server.py                   local bridge
+├── *.cs                               Unity simulation lineage
 ├── docs/
-│   ├── CST_2026.md                    modern theory map
-│   ├── ARCHITECTURE.md                software/data-flow architecture
-│   └── CLAIMS_AND_EVIDENCE.md         claim ledger and falsification rules
-├── tests/
-│   ├── test_ecosystem_engine.py
-│   └── test_smoke.py
-├── requirements.txt
-├── requirements-dev.txt
+│   ├── CST_2026.md
+│   ├── ARCHITECTURE.md
+│   └── CLAIMS_AND_EVIDENCE.md
+├── tests/                              Python verification
 ├── CITATION.cff
-└── .github/workflows/ci.yml
+└── .github/workflows/
 ```
-
----
-
-## If you only read three files
-
-1. **[`docs/CST_2026.md`](docs/CST_2026.md)** to understand the idea without mythology.
-2. **[`docs/CLAIMS_AND_EVIDENCE.md`](docs/CLAIMS_AND_EVIDENCE.md)** to see exactly what is and is not being claimed.
-3. **[`cst_engine.py`](cst_engine.py)** to inspect the original mechanism instead of taking anyone's word for it.
 
 ---
 
 ## Rights and reuse
 
-This repository contains material from different moments in its history, including files that may carry their own earlier license text. The repository-level rights notice is [`CORY_DAVIS_IP_AND_ACCESS_NOTICE.md`](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md).
+Repository-level rights guidance is in [`CORY_DAVIS_IP_AND_ACCESS_NOTICE.md`](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md).
 
-That notice expressly preserves third-party rights and any rights validly granted under earlier licenses for earlier copies or versions. Always inspect the specific file and applicable history before assuming a reuse right.
+This repository contains material from different points in its history, including files that may carry earlier file-specific license text. The rights notice preserves third-party rights and rights validly granted under earlier licenses. Inspect the specific file and history before assuming a reuse right.
+
+---
+
+## Support Cosmic Synapse
+
+I create because I love creating: music, painting, software, writing, research, science, educational tools and experiments that make people ask better questions.
+
+I want the work to remain as inspectable, teachable and shareable as responsibly possible. Protection is not the same as hoarding. We share one world, and I would rather give people tools to learn, build, test and imagine than lock everything away.
+
+This is for anyone who **dares to wonder, dares to love, and dares to question the questions**, no matter what they believe. ❤️
+
+### ☕ [Support Cosmic Synapse on Buy Me a Coffee](https://buymeacoffee.com/cosmic_syanpse)
+
+Support is optional. Curiosity is free.
 
 ---
 
@@ -342,20 +390,6 @@ That notice expressly preserves third-party rights and any rights validly grante
 
 ### CST is strongest when the strange idea is made measurable.
 
-**Read the code. Run the model. Break the assumptions. Keep the evidence.**
+**Read the code. Run the model. Play the world. Break the assumptions. Keep the evidence.**
 
 </div>
-
----
-
-## Support Cosmic Synapse
-
-I create because I love creating: music, painting, software, writing, research, science, educational tools, and experiments that make people ask better questions.
-
-I want this work to remain as inspectable, teachable, and shareable as responsibly possible. Some ideas may still need licenses, attribution, intellectual-property protection, or future patent strategy, but protection is not the same as hoarding. We share one world, and I would rather give people tools to learn, build, test, and imagine than lock everything away.
-
-This is for anyone who **dares to wonder, dares to love, and dares to question the questions**, no matter what they believe. ❤️
-
-### ☕ [Support Cosmic Synapse on Buy Me a Coffee](https://buymeacoffee.com/cosmic_syanpse)
-
-Support is always optional. Curiosity is free.
