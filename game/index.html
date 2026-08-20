@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#120a08" />
+  <title>Mars Synapse: Red Genesis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app" aria-label="Mars Synapse: Red Genesis">
+    <canvas id="game-canvas" aria-label="Mars game world"></canvas>
+    <section id="title-screen" class="screen title-screen">
+      <div class="title-kicker">CST // NAVISWORLD // PLAYABLE RESEARCH FICTION</div>
+      <h1>MARS<br><span>SYNAPSE</span></h1><p class="subtitle">RED GENESIS</p>
+      <p class="lede">Land. Survive. Build. Remember. Link three settlements into a planetary nervous system.</p>
+      <form id="seed-form" class="seed-form"><label>WORLD SEED<input id="seed-input" value="ARES-2026" maxlength="24" /></label><button type="submit" class="primary">BEGIN TOUCHDOWN</button></form>
+      <button id="continue-btn" class="secondary">CONTINUE AUTOSAVE</button>
+      <div class="title-meta"><span>Mars gravity</span><b>0.38g</b><span>State field</span><b>12 channels</b><span>Mode</span><b>Single player</b></div>
+      <p class="boundary-copy">CST values in this game are simulation mechanics and gameplay proxies, not measurements of new physical dimensions or fields.</p>
+    </section>
+    <header id="hud-top" class="hud hud-top"><div class="brand"><span class="brand-dot"></span><b>MARS SYNAPSE</b><small>RED GENESIS</small></div><div class="timebox"><b id="sol">SOL 1</b><span id="clock">00:00</span><span id="storm">-35°C</span></div><div class="cst-mini"><div id="mini-cst" class="mini-ring"><span id="psi">ψ 0 · H 0</span></div></div></header>
+    <aside class="hud vitals" aria-label="Player status"><div class="vital"><label>HEALTH <b id="health-value">100%</b></label><div><i id="health-meter"></i></div></div><div class="vital"><label>OXYGEN <b id="oxygen-value">100%</b></label><div><i id="oxygen-meter"></i></div></div><div class="vital"><label>SUIT <b id="energy-value">100%</b></label><div><i id="energy-meter"></i></div></div><div class="vital compact"><label>RAD SHIELD <b id="radiation-value">100%</b></label><div><i id="radiation-meter"></i></div></div><div class="vital compact"><label>THERMAL <b id="temperature-value">100%</b></label><div><i id="temperature-meter"></i></div></div><span id="mode" class="mode-pill">EVA</span></aside>
+    <section class="hud objective"><small>CURRENT OBJECTIVE</small><b id="objective">Restore lander power</b></section>
+    <nav class="action-bar" aria-label="Game actions"><button data-action="gather"><span>E</span><b>MINE</b></button><button data-action="scan"><span>F</span><b>SCAN</b></button><button data-action="rover"><span>R</span><b>ROVER</b></button><button data-action="panel" data-value="build"><span>B</span><b>BUILD</b></button><button data-action="panel" data-value="inventory"><span>I</span><b>CARGO</b></button><button data-action="panel" data-value="research"><span>⌁</span><b>TECH</b></button><button data-action="panel" data-value="cst"><span>12</span><b>CST</b></button><button data-action="panel" data-value="memory"><span>∞</span><b>MEMORY</b></button><button data-action="pause"><span>Ⅱ</span><b>PAUSE</b></button></nav>
+    <div id="stick" class="touch-stick" aria-label="Movement stick"><div id="stick-knob"></div></div><div class="touch-actions"><button data-action="gather">MINE</button><button data-action="scan">SCAN</button><button data-action="jump">JUMP</button></div>
+    <section id="panel" class="panel hidden" aria-live="polite"><div class="panel-head"><div><small>ARES OPERATIONS</small><h2>MISSION CONTROL</h2></div><button id="panel-close" aria-label="Close panel">×</button></div>
+      <div class="panel-section" data-section="build"><h3>CONSTRUCTION</h3><p>Place structures in front of the astronaut or rover. Distance and repeated cooperation strengthen the colony graph.</p><div id="build-list" class="card-grid"></div></div>
+      <div class="panel-section" data-section="inventory"><h3>CARGO + RESERVES</h3><div id="inventory-grid" class="inventory-grid"></div><h3>CAMPAIGN</h3><div id="mission-list"></div></div>
+      <div class="panel-section" data-section="research"><div class="section-title"><h3>RESEARCH TREE</h3><b id="research-points">0 research points</b></div><div id="research-list" class="card-grid"></div></div>
+      <div class="panel-section" data-section="cst"><h3>CST 12-CHANNEL PLANETARY STATE</h3><p>The colony's power, matter, water, life support, heat control, shielding, mobility, knowledge, memory, coherence, network coupling, and adaptation form a bounded state vector.</p><div id="cst-grid"></div></div>
+      <div class="panel-section" data-section="memory"><h3>MEMORY CHRONICLE</h3><p>Major events are chained to the previous event so every run leaves a persistent history.</p><div id="memory-list" class="memory-list"></div></div>
+      <div class="panel-section" data-section="network"><h3>SETTLEMENT NETWORK</h3><p>Relays extend link range. Frequently cooperating structures strengthen their edge weight. Unused links decay slowly.</p><div id="network-note">Open the CST panel to inspect current coupling.</div></div>
+      <div class="panel-section" data-section="pause"><h3>PAUSED</h3><div class="settings"><label>MASTER VOLUME<input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" /></label><button id="mic-btn" class="secondary">ENABLE OPTIONAL MIC REACTIVITY</button></div><h3>SAVE SLOTS</h3><div class="save-grid"><div><b>SLOT 1</b><button data-save-slot="1">SAVE</button><button data-load-slot="1">LOAD</button></div><div><b>SLOT 2</b><button data-save-slot="2">SAVE</button><button data-load-slot="2">LOAD</button></div><div><b>SLOT 3</b><button data-save-slot="3">SAVE</button><button data-load-slot="3">LOAD</button></div></div><div id="save-summaries"></div><p class="keys">WASD move · Shift sprint · Space jump · E mine · F scan · R rover · B build · I cargo · Tab CST · Esc pause</p></div>
+    </section>
+    <section id="victory" class="screen outcome hidden"><small>PLANETARY NETWORK STABLE</small><h2>RED GENESIS</h2><p>Three settlements are alive, linked, remembering, and adapting. Mars is no longer a collection of machines. It is a connected human system.</p><button onclick="location.reload()" class="primary">BEGIN ANOTHER TIMELINE</button></section>
+    <section id="failure" class="screen outcome hidden"><small>COLONY SIGNAL LOST</small><h2>THE RED WENT QUIET</h2><p>The settlement network crossed the point of recovery. The seed remains. Try the same Mars again, or write another one.</p><button onclick="location.reload()" class="primary">RESTART</button></section>
+  </main><script type="module" src="src/main.js"></script>
+</body></html>
