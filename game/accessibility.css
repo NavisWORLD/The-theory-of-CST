@@ -1,1 +1,2 @@
+@import url('cinematic.css');
 :root{--text-scale:1}.panel,.hud,.action-bar,.touch-actions{font-size:calc(1em * var(--text-scale))}.settings select{width:100%;margin-top:7px;background:#21130f;border:1px solid var(--line);color:var(--ink);padding:8px;border-radius:8px}.settings .toggle{display:flex;gap:8px;align-items:center}.high-contrast .hud,.high-contrast .panel,.high-contrast .action-bar{background:rgba(0,0,0,.94);border-color:rgba(255,255,255,.55)}.high-contrast{--muted:#f5eee8;--line:rgba(255,255,255,.46)}
