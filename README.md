@@ -345,3 +345,17 @@ That notice expressly preserves third-party rights and any rights validly grante
 **Read the code. Run the model. Break the assumptions. Keep the evidence.**
 
 </div>
+
+---
+
+## Support Cosmic Synapse
+
+I create because I love creating: music, painting, software, writing, research, science, educational tools, and experiments that make people ask better questions.
+
+I want this work to remain as inspectable, teachable, and shareable as responsibly possible. Some ideas may still need licenses, attribution, intellectual-property protection, or future patent strategy, but protection is not the same as hoarding. We share one world, and I would rather give people tools to learn, build, test, and imagine than lock everything away.
+
+This is for anyone who **dares to wonder, dares to love, and dares to question the questions**, no matter what they believe. ❤️
+
+### ☕ [Support Cosmic Synapse on Buy Me a Coffee](https://buymeacoffee.com/cosmic_syanpse)
+
+Support is always optional. Curiosity is free.
