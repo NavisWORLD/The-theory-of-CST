@@ -1,43 +1,6 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import { createInitialState } from '../src/state.js';
-import { stepPlayer, gatherAtPlayer, toggleVehicle, stepSurvival } from '../src/player.js';
-import { generateWorld } from '../src/world.js';
-
-test('jump uses Mars gravity and returns to ground', () => {
-  const s = createInitialState('JUMP');
-  stepPlayer(s, { jump: true }, 1/60);
-  assert.ok(s.player.verticalVelocity > 0);
-  for (let i=0;i<600;i++) stepPlayer(s, {}, 1/60);
-  assert.equal(s.player.altitude, 0);
-});
-
-test('gathering adds a deterministic resource stack', () => {
-  const s = createInitialState('MINE');
-  const w = generateWorld('MINE');
-  const before = Object.values(s.inventory).reduce((a,b)=>a+b,0);
-  gatherAtPlayer(s, w);
-  const after = Object.values(s.inventory).reduce((a,b)=>a+b,0);
-  assert.ok(after > before);
-});
-
-test('rover mode moves faster but drains rover battery', () => {
-  const s = createInitialState('ROVER');
-  toggleVehicle(s);
-  const before = s.player.rover.battery;
-  for (let i=0;i<120;i++) stepPlayer(s, { right:true }, 1/60);
-  assert.equal(s.player.mode, 'rover');
-  assert.ok(Math.hypot(s.player.vx, s.player.vy) > 11);
-  assert.ok(s.player.rover.battery < before);
-});
-
-test('survival recovery prevents negative health from soft collapse', () => {
-  const s = createInitialState('SAFE');
-  s.player.x = 200;
-  s.player.y = 200;
-  s.player.oxygen = 0;
-  s.player.health = 1;
-  stepSurvival(s, 10);
-  assert.ok(s.player.health > 0);
-  assert.ok(s.player.recoveryCount >= 1);
-});
+import test from 'node:test';import assert from 'node:assert/strict';import{createInitialState}from'../src/state.js';import{stepPlayer,gatherAtPlayer,toggleVehicle,stepSurvival}from'../src/player.js';import{generateWorld}from'../src/world.js';
+test('jump uses Mars gravity and returns to ground',()=>{const s=createInitialState('JUMP');stepPlayer(s,{jump:true},1/60);assert.ok(s.player.verticalVelocity>0);for(let i=0;i<600;i++)stepPlayer(s,{},1/60);assert.equal(s.player.altitude,0);});
+test('gathering adds a deterministic resource stack',()=>{const s=createInitialState('MINE'),w=generateWorld('MINE'),before=Object.values(s.inventory).reduce((a,b)=>a+b,0);gatherAtPlayer(s,w);assert.ok(Object.values(s.inventory).reduce((a,b)=>a+b,0)>before);});
+test('rover mode moves faster but drains rover battery',()=>{const s=createInitialState('ROVER');toggleVehicle(s);const before=s.player.rover.battery;for(let i=0;i<120;i++)stepPlayer(s,{right:true},1/60);assert.equal(s.player.mode,'rover');assert.ok(Math.hypot(s.player.vx,s.player.vy)>11);assert.ok(s.player.rover.battery<before);});
+test('survival recovery prevents negative health from soft collapse',()=>{const s=createInitialState('SAFE');s.player.x=200;s.player.y=200;s.player.oxygen=0;s.player.health=1;stepSurvival(s,10);assert.ok(s.player.health>0);assert.ok(s.player.recoveryCount>=1);});
+test('mobility research reduces rover energy consumption',()=>{const baseline=createInitialState('MOB-A'),upgraded=createInitialState('MOB-B');upgraded.research.unlocked.push('mobility-1');toggleVehicle(baseline);toggleVehicle(upgraded);for(let i=0;i<300;i++){stepPlayer(baseline,{right:true},1/60);stepPlayer(upgraded,{right:true},1/60);}assert.ok(upgraded.player.rover.battery>baseline.player.rover.battery);});

@@ -22,7 +22,7 @@ export function createInitialState(seed = 'ARES-01') {
     environment: { dust: 0.15, radiation: 0.18, temperature: -35, solar: 0.75, storm: null, stormClock: 0 },
     stats: { gathered: 0, built: 0, distance: 0, stormsSurvived: 0, scans: 0, rescues: 0, playtime: 0 },
     flags: { paused: false, gameOver: false, victory: false, tutorialDone: false },
-    settings: { reducedMotion:false, screenShake:true, volume:0.7, music:0.45, effects:0.7, textScale:1, quality:'high', autosaveMinutes:3 }
+    settings: { reducedMotion:false, screenShake:true, highContrast:false, volume:0.7, music:0.45, effects:0.7, textScale:1, controlSensitivity:1, quality:'high', autosaveMinutes:3 }
   };
 }
 
