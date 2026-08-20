@@ -1,1 +1,9 @@
-{"type":"module","private":true}
+{
+  "name": "mars-synapse-red-genesis",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/*.js"
+  }
+}

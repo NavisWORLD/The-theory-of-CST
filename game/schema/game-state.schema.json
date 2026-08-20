@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NavisWORLD/The-theory-of-CST/game/schema/game-state.schema.json",
+  "title": "Mars Synapse Red Genesis Game State",
+  "type": "object",
+  "required": ["schemaVersion","seed","time","player","inventory","resources","structures","settlements","research","missions","achievements","cst","environment","stats","flags","settings"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "seed": {"type": "string"},
+    "time": {"type": "object", "required": ["elapsed","sol","solPhase"]},
+    "player": {"type": "object", "required": ["x","y","health","oxygen","energy","radiation","mode","rover"]},
+    "inventory": {"type": "object", "additionalProperties": {"type": "number"}},
+    "resources": {"type": "object", "required": ["water","oxygen","power","powerCapacity"]},
+    "structures": {"type": "array", "items": {"type": "object", "required": ["id","type","x","y","health"]}},
+    "settlements": {"type": "array", "items": {"type": "object", "required": ["id","name","x","y","health"]}},
+    "research": {"type": "object", "required": ["points","unlocked"]},
+    "missions": {"type": "object", "required": ["act","completed","current"]},
+    "achievements": {"type": "array"},
+    "cst": {
+      "type": "object",
+      "required": ["channels","entropy","psiProxy","links","memory"],
+      "properties": {
+        "channels": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+        "entropy": {"type": "number", "minimum": 0, "maximum": 1},
+        "psiProxy": {"type": "number", "minimum": 0, "maximum": 1},
+        "links": {"type": "array"},
+        "memory": {"type": "array"}
+      }
+    },
+    "environment": {"type": "object", "required": ["dust","radiation","temperature","solar","storm","stormClock"]},
+    "stats": {"type": "object"},
+    "flags": {"type": "object", "required": ["paused","gameOver","victory","tutorialDone"]},
+    "settings": {"type": "object"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,35 @@
+name: Red Genesis verification
+
+on:
+  push:
+    paths:
+      - "game/**"
+      - ".github/workflows/game-ci.yml"
+  pull_request:
+    paths:
+      - "game/**"
+      - ".github/workflows/game-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  game:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run Red Genesis tests
+        working-directory: game
+        run: npm test
+
+      - name: Check JavaScript syntax
+        working-directory: game
+        run: npm run check
