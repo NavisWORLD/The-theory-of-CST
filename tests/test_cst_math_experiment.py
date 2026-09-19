@@ -16,7 +16,8 @@ def _run_module():
 
 def test_frozen_results_match_reexecution():
     expected = json.loads((EXP / 'results.json').read_text(encoding='utf-8'))
-    actual = _run_module().execute()
+    # JSON round-trip normalizes dataclass tuple coordinates to JSON arrays.
+    actual = json.loads(json.dumps(_run_module().execute()))
     assert actual == expected
 
 
