@@ -30,7 +30,7 @@ The first command overwrites only the local experiment result file. Existing pro
 | Distance scaling 0.1× / 1× / 10× | Newtonian pair contribution follows inverse-distance scaling |
 | High-precision reporting | Decimal(60) sums already-computed float64 terms retain tiny contribution; **not a higher-precision recomputation of the original expressions** |
 
-Local `pytest -q tests/test_cst_math_v2.py` on the isolated v2 files: 8 passed after correction. Historical full-suite results are separately reported in migration documentation and CI; do not conflate those with a local full-repository run.
+Local `pytest -q tests/test_cst_math_v2.py tests/test_cst_math_experiment.py` on the isolated v2 files: 10 passed across v2 and experiment-replay checks after correction. Historical full-suite results are separately reported in migration documentation and CI; do not conflate those with a local full-repository run.
 
 The standalone run originally found a failure of strict float64 permutation invariance from operand ordering. It was fixed in `cst_math_v2.py`; the earlier failure is retained here rather than misrepresented as a first-pass success.
 
