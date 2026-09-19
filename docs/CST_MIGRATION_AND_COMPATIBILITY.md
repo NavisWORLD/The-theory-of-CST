@@ -8,7 +8,7 @@ Mars Synapse: Red Genesis remains unchanged. `game/src/cst.js`, `game/src/save.j
 
 **Verification ledger:**
 - Baseline GitHub Actions [CST verification run 32338611513](https://github.com/NavisWORLD/The-theory-of-CST/actions/runs/32338611513): success at main baseline (2026-08-20), not a locally rerun baseline.
-- Isolated local v2 tests after the float64 permutation fix: 8 passed via `PYTHONPATH=. python -m pytest tests/test_cst_math_v2.py -q` in a reconstructed subset of files.
+- Isolated local v2 and experiment-replay tests after the float64 permutation and JSON tuple-normalization fixes: 10 passed via `PYTHONPATH=. python -m pytest tests/test_cst_math_v2.py tests/test_cst_math_experiment.py -q` in a reconstructed subset of files.
 - Local full legacy Python suite: UNEXECUTED (container has no network route to clone GitHub; connected GitHub is available separately).
 - Local Node game suite and visual/browser checks: UNEXECUTED in this container; unchanged source and save contract.
 - CI on update branch: inspect actual run result before claiming pass; GitHub run status is not inferred from individual file commits.
