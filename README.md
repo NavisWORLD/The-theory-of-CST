@@ -393,3 +393,8 @@ Support is optional. Curiosity is free.
 **Read the code. Run the model. Play the world. Break the assumptions. Keep the evidence.**
 
 </div>
+
+
+## CST v2 research candidate (2026-09-19)
+
+The historical 11D simulator, 12D formula, and Red Genesis gameplay are preserved. A separate, opt-in [CST v2 energy diagnostic](cst_math_v2.py) corrects units for explicitly scoped three-dimensional inputs; it does **not** establish twelve physical spatial dimensions, a force law, or quantum effects. Read the [mathematical audit](docs/MATH_AUDIT.md), [derivation](docs/CST_CORRECTED_FORMULATION.md), [controlled numerical evidence](docs/CST_MATH_EXPERIMENT_001.md), and [validation boundary](docs/CST_VALIDATION_RESULTS.md). Run `PYTHONPATH=. python experiments/cst_math_001/run.py` and `MOCK_AUDIO=1 PYTHONPATH=. pytest -q` to reproduce supported software results. No game/save migration is required.

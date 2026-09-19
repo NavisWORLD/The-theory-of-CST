@@ -11,7 +11,8 @@ Use these labels:
 - **MEASURED**: a defined experiment produced a metric;
 - **NULL**: a test failed its success criterion;
 - **HYPOTHESIS**: a falsifiable proposition awaiting stronger evidence;
-- **MODEL / METAPHOR**: conceptual language, not a literal scientific claim.
+- **MODEL / METAPHOR**: conceptual language, not a literal scientific claim;
+- **NOT ESTABLISHED**: evidence missing for the proposition.
 
 ## Repository-level ledger
 
@@ -75,3 +76,18 @@ Repeat across enough trials to estimate variance. Report wins, losses, nulls, an
 ## Physical-hypothesis boundary
 
 A computational analogy becomes a physical theory only when it makes precise empirical predictions and survives comparison with observation. Code execution, visual beauty, internal consistency, and surprising emergent behavior can motivate a hypothesis, but none of them substitute for external measurement.
+
+
+## CST mathematics closure — 2026-09-19
+
+| Claim | Status | Evidence | Limitation |
+|---|---|---|---|
+| Historical published expression contains mismatched dimensions | OBSERVED | [term audit](MATH_AUDIT.md) | This corrects a claim, not the immutable historical text |
+| CST v2 computes explicit term-separated Joule diagnostics | IMPLEMENTED | [code](../cst_math_v2.py), [unit tests](../tests/test_cst_math_v2.py) | A diagnostic is not a new dynamical law |
+| Historical information term dominates the frozen synthetic input | MEASURED | [raw results](../experiments/cst_math_001/results.json) | Invalid historical units; no physical force |
+| Corrected information term changes the float64 node total at tested scale | NULL | [experiment](CST_MATH_EXPERIMENT_001.md): 0 J difference in all three nodes | Term exists separately but is sub-ULP |
+| Corrected information coupling is a real new physical interaction | HYPOTHESIS | [proposed model](CST_CORRECTED_FORMULATION.md) | Not derived from first principles or externally validated |
+| Twelve channels prove twelve physical spatial dimensions | NOT ESTABLISHED | [audit](MATH_AUDIT.md) | Software channel count does not establish spacetime geometry |
+| Corrected CST outpredicts Newtonian or other physical models | NOT ESTABLISHED | [validation results](CST_VALIDATION_RESULTS.md) | No held-out measured physical observable or additional-force law |
+| Mars Synapse gameplay psiProxy measures a physical field | MODEL / METAPHOR | [game code](../game/src/cst.js) | Bounded software state and game mechanics only |
+| IBM or CERN entanglement results validate CST | NOT ESTABLISHED | [validation protocol](CST_VALIDATION_PROTOCOL.md) | Independent work is not a test of this equation |

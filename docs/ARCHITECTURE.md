@@ -185,3 +185,8 @@ persistent state
 ```
 
 The legacy simulator is therefore best read as the origin of the design language rather than the final form of the software stack.
+
+
+## Optional research-only v2 diagnostic
+
+`cst_math_v2.py` is a distinct, standalone energy-bookkeeping API, independent of the legacy `CSTEntity.compute_psi`, `cst_functions.compute_psi_i`, TCP/Unity exchange and browser-game `psiProxy`. The only automatic integration is its isolated experiment/tests. Three physical coordinates are required; the twelve-value memory and gameplay channels remain computational state. No extra-force simulator coupling is implemented. See [compatibility](CST_MIGRATION_AND_COMPATIBILITY.md) and [audited formulation](CST_CORRECTED_FORMULATION.md).

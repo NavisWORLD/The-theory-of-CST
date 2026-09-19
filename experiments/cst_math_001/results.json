@@ -1,0 +1,71 @@
+{
+  "arms": {
+    "classical": [
+      {"chaos_modulation_j": 0.0, "connectivity_j": 0.0, "gravitational_j": -1.260750257755272e-06, "information_j": 0.0, "kinetic_j": 809812997.3531498, "psi_proxy": 809812997.3531485, "total_j": 809812997.3531485},
+      {"chaos_modulation_j": 0.0, "connectivity_j": 0.0, "gravitational_j": -1.2509661219534726e-06, "information_j": 0.0, "kinetic_j": 744814461.5509671, "psi_proxy": 744814461.5509659, "total_j": 744814461.5509659},
+      {"chaos_modulation_j": 0.0, "connectivity_j": 0.0, "gravitational_j": -5.860100767415313e-07, "information_j": 0.0, "kinetic_j": 1020964986.0435944, "psi_proxy": 1020964986.0435938, "total_j": 1020964986.0435938}
+    ],
+    "corrected": [
+      {"chaos_modulation_j": 80063372.93916155, "connectivity_j": 3.945298685505944e-07, "gravitational_j": -1.260750257755272e-06, "information_j": -6.58396991875e-23, "kinetic_j": 809812997.3531498, "psi_proxy": 889876370.2923105, "total_j": 889876370.2923105},
+      {"chaos_modulation_j": 4660608.291378801, "connectivity_j": 3.8500679593762254e-07, "gravitational_j": -1.2509661219534726e-06, "information_j": -8.809881427904721e-23, "kinetic_j": 744814461.5509671, "psi_proxy": 749475069.842345, "total_j": 749475069.842345},
+      {"chaos_modulation_j": 2397392.47457812, "connectivity_j": 7.11089058923144e-08, "gravitational_j": -5.860100767415313e-07, "information_j": -7.869314296654722e-23, "kinetic_j": 1020964986.0435944, "psi_proxy": 1023362378.5181719, "total_j": 1023362378.5181719}
+    ],
+    "no_chaos": [
+      {"chaos_modulation_j": 0.0, "connectivity_j": 3.945298685505944e-07, "gravitational_j": -1.260750257755272e-06, "information_j": -6.58396991875e-23, "kinetic_j": 809812997.3531498, "psi_proxy": 809812997.3531489, "total_j": 809812997.3531489},
+      {"chaos_modulation_j": 0.0, "connectivity_j": 3.8500679593762254e-07, "gravitational_j": -1.2509661219534726e-06, "information_j": -8.809881427904721e-23, "kinetic_j": 744814461.5509671, "psi_proxy": 744814461.5509663, "total_j": 744814461.5509663},
+      {"chaos_modulation_j": 0.0, "connectivity_j": 7.11089058923144e-08, "gravitational_j": -5.860100767415313e-07, "information_j": -7.869314296654722e-23, "kinetic_j": 1020964986.0435944, "psi_proxy": 1020964986.0435939, "total_j": 1020964986.0435939}
+    ],
+    "no_information": [
+      {"chaos_modulation_j": 80063372.93916155, "connectivity_j": 3.945298685505944e-07, "gravitational_j": -1.260750257755272e-06, "information_j": 0.0, "kinetic_j": 809812997.3531498, "psi_proxy": 889876370.2923105, "total_j": 889876370.2923105},
+      {"chaos_modulation_j": 4660608.291378801, "connectivity_j": 3.8500679593762254e-07, "gravitational_j": -1.2509661219534726e-06, "information_j": 0.0, "kinetic_j": 744814461.5509671, "psi_proxy": 749475069.842345, "total_j": 749475069.842345},
+      {"chaos_modulation_j": 2397392.47457812, "connectivity_j": 7.11089058923144e-08, "gravitational_j": -5.860100767415313e-07, "information_j": 0.0, "kinetic_j": 1020964986.0435944, "psi_proxy": 1023362378.5181719, "total_j": 1023362378.5181719}
+    ],
+    "shuffled_information": [
+      {"chaos_modulation_j": 80063372.93916155, "connectivity_j": 3.945298685505944e-07, "gravitational_j": -1.260750257755272e-06, "information_j": -1.31679398375e-22, "kinetic_j": 809812997.3531498, "psi_proxy": 889876370.2923105, "total_j": 889876370.2923105},
+      {"chaos_modulation_j": 4660608.291378801, "connectivity_j": 3.8500679593762254e-07, "gravitational_j": -1.2509661219534726e-06, "information_j": -1.3810612026452362e-22, "kinetic_j": 744814461.5509671, "psi_proxy": 749475069.842345, "total_j": 749475069.842345},
+      {"chaos_modulation_j": 2397392.47457812, "connectivity_j": 7.11089058923144e-08, "gravitational_j": -5.860100767415313e-07, "information_j": -4.4049407139523606e-23, "kinetic_j": 1020964986.0435944, "psi_proxy": 1023362378.5181719, "total_j": 1023362378.5181719}
+    ]
+  },
+  "base_sha": "306362e45af5ed3ac69a2b69cee4e3cddd066b77",
+  "experiment": "cst_math_001",
+  "inputs": [
+    {"chaos_energy_j": 0.0, "information_bits": 1.0, "lyapunov_per_s": 0.09886649535244106, "mass_kg": 163348.96914538572, "position_m": [0.0, 0.0, 0.0], "velocity_m_s": [61.27675078951282, -72.11735727145172, 30.97377829025308]},
+    {"chaos_energy_j": 0.0, "information_bits": 2.0, "lyapunov_per_s": 0.006257408431186696, "mass_kg": 176631.4076919603, "position_m": [1000000.0, 0.0, 0.0], "velocity_m_s": [-19.55468994346603, 12.077509284336799, -88.9117138453472]},
+    {"chaos_energy_j": 0.0, "information_bits": 3.0, "lyapunov_per_s": 0.002348163264509595, "mass_kg": 109295.9713473433, "position_m": [0.0, 2000000.0, 0.0], "velocity_m_s": [-95.50523319835018, -36.39469058967813, 90.7565425133869]}
+  ],
+  "metrics": {
+    "distance_scaling": {
+      "0.1": [-1.2607502577552718e-05, -1.2509661219534726e-05, -5.860100767415313e-06],
+      "1.0": [-1.260750257755272e-06, -1.2509661219534726e-06, -5.860100767415313e-07],
+      "10.0": [-1.260750257755272e-07, -1.2509661219534726e-07, -5.860100767415312e-08]
+    },
+    "finite_corrected": true,
+    "float64_info_ablation_delta_j": [0.0, 0.0, 0.0],
+    "information_scaling": {
+      "0": [0.0, 0.0, 0.0],
+      "1": [-6.58396991875e-23, -8.809881427904721e-23, -7.869314296654722e-23],
+      "2": [-1.31679398375e-22, -1.7619762855809442e-22, -1.5738628593309443e-22]
+    },
+    "legacy_information_dominates": true,
+    "permutation_invariant": true,
+    "precise_sum_corrected_j": [
+      "889876370.292310459448899430576357159803279725954844165615778",
+      "749475069.842345032080312980274131593319065122825997217339059",
+      "1023362378.51817196526478755532404026989394650824185797439523"
+    ],
+    "precise_sum_no_information_j": [
+      "889876370.292310459448899430576422999502467225951818363682832",
+      "749475069.842345032080312980274219692133344170037467790734808",
+      "1023362378.51817196526478755532411896303691305545879863814207"
+    ],
+    "repeated_evaluation_equal": true
+  },
+  "original": [
+    {"connectivity_historical": 0.1416352043262502, "gravity_j": -2.521500515510544e-06, "information_invalid": -1.5960756288452652e+56, "kinetic_j": 80981299.73531647, "psi_historical": -1.5960756288452654e+92},
+    {"connectivity_historical": 0.13685964593932548, "gravity_j": -2.5019322439069456e-06, "information_invalid": -2.135677594767147e+56, "kinetic_j": 74481446.1550968, "psi_historical": -2.1356775947671472e+92},
+    {"connectivity_historical": 0.015580333341605756, "gravity_j": -1.1720201534830626e-06, "information_invalid": -1.907666790646395e+56, "kinetic_j": 102096498.60435951, "psi_historical": -1.9076667906463952e+92}
+  ],
+  "params": {"alpha_connect": 1.0, "alpha_information": 1.0, "decay_length_m": 1000000.0, "information_length_m": 1000000.0, "phi": 1.0, "reference_bits": 1.0, "reference_energy_j": 1.0, "tau_s": 1.0, "temperature_k": 2.725},
+  "scope": "synthetic arithmetic; no independent external dataset or new force law",
+  "seed": 20260919
+}
