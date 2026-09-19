@@ -1,5 +1,7 @@
 # 12D Cosmic Synapse Theory (CST) Updated Formula Explanation
 
+> **HISTORICAL, NOT DIMENSIONALLY VALIDATED.** This document preserves the original published CST 12D equation and numerical examples as research lineage. Several unit and physical-domain statements below are incorrect: in particular, \(c\lambda\) is acceleration (not energy), the alleged dimensionless connectivity factor has units of mass, and the information prefactor is not an energy scale. Do not use the numerical examples as measured physics. See [the audited CST v2 candidate](docs/CST_CORRECTED_FORMULATION.md), [term-by-term audit](docs/MATH_AUDIT.md), and [frozen control results](docs/CST_MATH_EXPERIMENT_001.md). The corrected candidate uses a *dimensionless computational proxy* rather than claiming a physical 12D density.
+
 ## Overview
 
 This document provides a detailed explanation of the updated mathematical formula for the 12D Cosmic Synapse Theory (CST), a speculative framework that models the universe as a 12-dimensional neural network. In this model, cosmic entities (e.g., stars, planets, black holes, nebulae, galaxies) are treated as neurons, and their interactions—gravitational, synaptic, chaotic, and informational—mimic synaptic connections in a neural network. The updated formula introduces an informational potential term, enhancing the theory’s ability to model complex interactions and opening up new applications across various domains.
