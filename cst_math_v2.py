@@ -108,7 +108,9 @@ def evaluate(nodes: Tuple[Node, ...], params: Parameters = Parameters(),
             r = sqrt(fsum((d*d for d in delta)))
             if not isfinite(r) or r <= 0:
                 raise ValueError('distinct nodes require finite, strictly positive separation')
-            base = G * a.mass_kg * b.mass_kg / r
+            # Canonical multiplication order prevents order-dependent float64 rounding.
+            smaller_mass, larger_mass = sorted((a.mass_kg, b.mass_kg))
+            base = G * smaller_mass * larger_mass / r
             grav = -0.5 * base
             conn = (0.0 if mode in ('classical', 'no_connectivity') else
                     0.5 * params.alpha_connect * base * exp(-r / params.decay_length_m))
