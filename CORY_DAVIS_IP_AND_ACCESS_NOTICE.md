@@ -1,3 +1,5 @@
+> **2026-09-27 open-source transition:** This older permission-required notice describes the earlier pre-license era only. Original Cory-owned software and documentation newly released with the root Apache-2.0 LICENSE now carry that license. No older statement here restricts rights granted by the new license. See OPEN_SOURCE_SCOPE.md.
+
 # Cory Davis / NavisWORLD — Intellectual Property and Access Notice
 
 **Effective date:** 2026-08-14
