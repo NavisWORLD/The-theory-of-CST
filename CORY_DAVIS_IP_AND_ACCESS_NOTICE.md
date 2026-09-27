@@ -1,39 +1,15 @@
-# Cory Davis / NavisWORLD — Intellectual Property and Access Notice
+# CST / NavisWORLD — licensing and IP notice
 
-**Effective date:** 2026-08-14
+Copyright 2026 Cory Davis / NavisWORLD for original works he owns.
 
-Copyright © 2026 Cory Davis / NavisWORLD. All rights reserved in original material owned by Cory Davis except where a file, directory, dependency, prior release, or other identified component is governed by a separate license.
+## Prospective open-source release (upon adoption)
 
-## Scope
+Cory-owned original software, simulator and game source in a release adopting root [Apache License 2.0](LICENSE) are offered under Apache-2.0 except component-specific terms. Cory-owned original research prose, repository-authored scientific explanations and figures expressly covered by [LICENSE-DOCS.md](LICENSE-DOCS.md) are offered under CC BY 4.0, which permits sharing, adaptations and commercial use with its attribution and other conditions. These open licenses provide their public grants without further written permission; Cory retains copyright in his contributions.
 
-This notice applies only to original copyrightable material owned by Cory Davis / NavisWORLD that is not already subject to another license. It does **not** relicense third-party material, remove attribution obligations, or revoke rights that were validly granted under an earlier license for an earlier copy or version.
+## Historical and external rights
 
-## Public access is not a general reuse license
+Prior copies remain governed by whatever valid historical grants applied at distribution. Third-party content, quoted publications, licensed datasets, scientific imagery by others, external models/weights, private data, trademarks and independently protected research materials with separately stated terms are not automatically relicensed. See LICENSE_HISTORY.md and NOTICE.md. Git history preserves earlier access notices without narrowing the new published grants.
 
-Public availability of source code or documentation is intended to permit inspection, evaluation, citation, and the limited uses GitHub's Terms of Service or applicable law necessarily permit. Except for those limited rights, no permission is granted to copy, reproduce, modify, adapt, translate, distribute, publish, sublicense, sell, commercialize, host as a service, incorporate into another product, create derivative works from, or otherwise exploit covered original material.
+## Independent legal questions
 
-No permission is granted to use covered original material as training, fine-tuning, retrieval, evaluation, distillation, synthetic-data, embedding, or other model-development input for a commercial AI/ML system, except where applicable law independently permits such use or a separate written agreement expressly authorizes it.
-
-## Permission requires a separate signed agreement
-
-Any additional authorization must be contained in a separate written contract that specifically identifies the permitted material and scope of use and bears the signatures of Cory Davis and the counterparty. Email, direct messages, issues, pull requests, stars, forks, downloads, verbal statements, or silence do not by themselves constitute additional permission. Cory Davis may require physical, in-person execution as a condition of granting permission.
-
-## No implied patent, trademark, or confidential-information license
-
-No patent license, trademark license, trade-name license, or other implied intellectual-property license is granted by this notice. Non-public confidential information remains subject to any applicable confidentiality, trade-secret, or contractual protections.
-
-Copyright does not by itself protect abstract ideas, concepts, systems, methods, algorithms, or discoveries. Nothing in this notice claims otherwise. Protection for such subject matter, where available, may depend on patent, trade-secret, contract, or other law.
-
-## Third-party and prior-license materials
-
-Third-party libraries, models, datasets, code, documentation, and other materials remain governed by their respective licenses. Where an earlier version of material was distributed under an open-source or other irrevocable license, this notice does not purport to cancel rights already granted for that earlier version.
-
-## Reservation of rights
-
-To the maximum extent permitted by law, all rights not expressly granted are reserved. No waiver is effective unless made in a separate signed writing by the applicable rights holder.
-
-## No warranty
-
-Covered material is provided for research, review, and evaluation as-is, without warranties or guarantees, except to the extent a separate signed agreement expressly provides otherwise.
-
-For licensing inquiries, use the repository owner's official contact channel and request a separate written agreement before any restricted use.
+Copyright applies to original expression, not abstract mathematical methods or scientific ideas by themselves. Patent, contract, privacy, trade-secret, trademark and other independent rights, if applicable, must be assessed separately. The Zenodo research DOI documents publication provenance; it is not a blanket patent claim or software license.

@@ -366,9 +366,7 @@ A DOI is a persistent scholarly reference. It does not by itself validate a phys
 
 ## Rights and reuse
 
-Repository-level rights guidance is in [`CORY_DAVIS_IP_AND_ACCESS_NOTICE.md`](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md).
-
-This repository contains material from different points in its history, including files that may carry earlier file-specific license text. The rights notice preserves third-party rights and rights validly granted under earlier licenses. Inspect the specific file and history before assuming a reuse right.
+**Prospective open-source release:** original Cory-owned code, simulator and game source use [Apache License 2.0](LICENSE); original Cory-owned research text/documentation and expressly covered figures use [CC BY 4.0](LICENSE-DOCS.md), subject to file-specific exceptions. Earlier grants and third-party sources keep their respective rights. See [LICENSE_HISTORY.md](LICENSE_HISTORY.md), [NOTICE.md](NOTICE.md) and [CORY_DAVIS_IP_AND_ACCESS_NOTICE.md](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md). Copyright ownership, research priority and software licensing are distinct issues.
 
 ---
 
