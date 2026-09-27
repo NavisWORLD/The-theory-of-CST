@@ -364,11 +364,9 @@ A DOI is a persistent scholarly reference. It does not by itself validate a phys
 
 ---
 
-## Rights and reuse
+## Open-source rights and reuse
 
-Repository-level rights guidance is in [`CORY_DAVIS_IP_AND_ACCESS_NOTICE.md`](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md).
-
-This repository contains material from different points in its history, including files that may carry earlier file-specific license text. The rights notice preserves third-party rights and rights validly granted under earlier licenses. Inspect the specific file and history before assuming a reuse right.
+Original Cory-owned software and documentation published in this repository's new open-source revision are licensed Apache License 2.0 under the root [LICENSE](LICENSE), except for any individually marked material under separate terms. This permits modification, redistribution and commercial use under Apache-2.0. Original authors retain copyright. Historic releases remain subject to their valid previous licenses; external research publications, artwork, datasets, model weights and third-party dependencies are not automatically relicensed. See [OPEN_SOURCE_SCOPE.md](OPEN_SOURCE_SCOPE.md) and [CORY_DAVIS_IP_AND_ACCESS_NOTICE.md](CORY_DAVIS_IP_AND_ACCESS_NOTICE.md).
 
 ---
 
