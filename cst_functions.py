@@ -27,7 +27,7 @@ from web3 import Web3
 D_0 = 100  # Characteristic latency (ms) for influence decay
 T_MAX = 1_000_000  # Max transaction volume (USD) for normalization
 KAPPA = 0.01  # Informational scaling factor for token minting
-R_0 = 1e6  # Characteristic distance (meters, ~1 Mpc) for decay
+R_0 = 1e6  # Characteristic distance (meters) for decay. NOTE: 1e6 m is NOT 1 Mpc (1 Mpc = 3.086e22 m); see cst_psi.py
 G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
 C = 2.99792458e8  # Speed of light (m/s)
 K_B = 1.380649e-23  # Boltzmann constant (J/K)
