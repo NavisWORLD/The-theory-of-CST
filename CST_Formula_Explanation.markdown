@@ -328,3 +328,14 @@ The updated CST formula, with its inclusion of an informational potential term, 
 ## Conclusion
 
 The updated CST formula, with its informational potential term, provides a powerful framework for modeling complex systems across multiple domains. By integrating classical physics, chaos theory, and information theory, it offers a unique lens for understanding the universe and its dynamics. The applications outlined above—from quantum physics to bio-frequency security—demonstrate the formula’s versatility and potential for future innovation. Researchers, developers, and innovators are encouraged to explore and build upon this framework, leveraging \(\psi_i\) to create new tools, systems, and experiences that bridge the physical, informational, and computational worlds.
+## Erratum and unit-consistent form (2026-10-15)
+
+An independent check (sympy units plus numeric replay) found these slips in the worked example above. The original text is kept for history.
+
+- `G m_i m_j / (r_ij c^2)` has units of **kilograms**, not dimensionless. For m = 1e30 kg and r = 1e10 m it is **7.42e22 kg**, not 7.42e-15. So the synaptic term above is kg·J, not J.
+- `k_B T_CMB / c` has units J·s/m (kg·m/s), not J/m. So the informational term per pair is kg/s, not J.
+- `c^3 (4πR^2) / (4 ħ G ln 2)` for R = 3.5e8 m is **2.13e87** bits, not 2.13e88 (4ħG ln2 = 1.95e-44, not 1.95e-45). The per-pair informational value is **5.69e133**, not 5.67e145.
+- In the kinetic weight `φ(m c^2 + E_chaos) + cλ + 1`, the three addends have different units (J, m/s², 1).
+- Because the four terms have different units, ψ_i as written has no single unit.
+
+**Unit-consistent replacement** (`cst_psi.py`, tested in `tests/test_cst_psi.py`): divide every term by the reference energy E_ref,i = m_i c^2 (1 + λ_i τ). Then K, S, U and I are each dimensionless and ψ_i = K + S + U + I. τ, r0 and ℓ are explicit model parameters. In the r0 → ∞ limit the screened term equals the Newtonian one, and U reduces to -G m_j/(r c²) (the Newtonian potential in units of rest energy). With ℓ = Planck length, the informational term still exceeds gravity by more than 10^50 for star-sized radii. That is a modelling choice to revisit, not a unit error.
